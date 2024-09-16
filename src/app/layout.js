@@ -15,6 +15,8 @@ import theme from '@/styles/theme';
 // Note: Global css file...!
 import "./globals.css";
 
+import AppLayOut from "@/app/page";
+
 // Note: It  will not work in client side components...!
 // export const metadata = {
 //   title: "Create Next App",
@@ -29,7 +31,9 @@ const RootLayout = ({ children }) => {
           <PersistGate persistor={persistor}>
             <ThemeProvider theme={theme}>
               <CssBaseline />
-              {children}
+              <AppLayOut>
+                {children}
+              </AppLayOut>
             </ThemeProvider>
           </PersistGate>
         </Provider>
