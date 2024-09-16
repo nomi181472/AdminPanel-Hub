@@ -1,4 +1,4 @@
-// NoteL App component...!
+// Note: App component...!
 
 import React from 'react';
 
