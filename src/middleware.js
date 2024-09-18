@@ -3,7 +3,7 @@
 import { NextResponse } from 'next/server';
 import { unAuthenticatedRoutes, authenticatedRoutes } from './utils/routes/routes'; // Routes...!
 
-const isUserLoggedIn = false;
+const isUserLoggedIn = true;
 
 // Note: Middleware handler...!
 const middleware = (req) => {

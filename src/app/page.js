@@ -5,12 +5,13 @@
 import * as React from 'react';
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
+import { useSelector } from "react-redux";
 
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box';
 
 // Note: Importing required components...!
-import { DrawerHeader, Main } from '@/components/mui-sections/mui-ections';
+import { DrawerHeader, Main } from '@/components/mui-sections/mui-sections';
 import AppDrawer from '@/components/drawer/drawer';
 import AppNavBar from "@/components/appbar/appbar";
 
@@ -59,4 +60,25 @@ const AppLayOut = (props) => {
   );
 };
 
-export default AppLayOut;
+const RenderAppLayOut = (props) => {
+
+  // Note: Fetching data from redux...!
+  // const { authenticatedUser } = useSelector((state) => state.authStates);
+  // console.log("User: ", authenticatedUser);
+
+  const authenticatedUser = true;
+
+  return (
+    (authenticatedUser)
+      ?
+      (<AppLayOut {...props} />)
+      :
+      (
+        <div>
+          {props?.children}
+        </div>
+      )
+  );
+};
+
+export default RenderAppLayOut;

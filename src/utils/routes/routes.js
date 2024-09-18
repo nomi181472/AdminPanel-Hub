@@ -13,6 +13,7 @@ const authenticatedRoutes = [
     "/dashboard",
     "/about",
     "/contact",
+    "/roles",
 ];
 
 const appRoutes = [
@@ -34,6 +35,13 @@ const appRoutes = [
         id: 3,
         label: 'contact',
         path: '/contact',
+        icon: Home
+    },
+
+    {
+        id: 4,
+        label: 'roles',
+        path: '/roles',
         icon: Home
     },
 ];

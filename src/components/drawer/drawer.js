@@ -19,7 +19,7 @@ import { Box } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 import { appRoutes } from '@/utils/routes/routes';
-import { drawerWidth, DrawerHeader } from '../mui-sections/mui-ections';
+import { drawerWidth, DrawerHeader } from '../mui-sections/mui-sections';
 
 const AppDrawer = (props) => {
     const { openDrawer, closeDrawer } = props;

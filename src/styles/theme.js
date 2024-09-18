@@ -11,19 +11,18 @@ const theme = createTheme({
             red: '#ff0000',
             yellow: '#ffff00',
             _fff: "#fff",
-            _ffffff30: "#ffffff30"
+            _ffffff30: "#ffffff30",
+            _09CD87: "#09CD87"
         },
     },
 
     typography: {
-        fontFamily: 'Georgia, serif', // Setting global font family
+        fontFamily: 'sans-serif',
         h1: {
             textTransform: 'uppercase', // Custom styles for h1
-            // fontFamily: 'Georgia, serif',
         },
         h2: {
             textTransform: 'uppercase', // Custom styles for h2
-            // fontFamily: 'Georgia, serif',
         },
         // You can extend this to other variants like h3, body1, etc.
         button: {

@@ -3,7 +3,7 @@
 import { styled } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
 
-const drawerWidth = 240;
+const drawerWidth = 250;
 
 // Note: Drawer header section...!
 const DrawerHeader = styled('div')(({ theme }) => ({
