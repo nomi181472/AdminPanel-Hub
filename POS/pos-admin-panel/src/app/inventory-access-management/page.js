@@ -20,6 +20,8 @@ import {
 import { Search as SearchIcon, Visibility, Edit, Delete } from '@mui/icons-material';
 import { customStyles } from '@/styles/styles';
 import Searchbar from '@/components/searchbar/searchbar';
+import StatsCard from '@/components/stats-card/stats-card';
+import PagesNavbar from '@/components/pages-navbar/pages-navbar';
 
 // Note: Table heading data...!
 const tableHead = [
@@ -104,7 +106,7 @@ const InventoryAccessManagement = () => {
     };
 
     return (
-        <Box sx={{ padding: 3 }}>
+        <Box sx={{ padding: 0 }}>
 
             {/* Heading Section */}
             <Box mb={2}>
@@ -114,8 +116,14 @@ const InventoryAccessManagement = () => {
                 </Typography>
             </Box>
 
+            {/* Note: Pages navbar component */}
+            <PagesNavbar />
+
+            {/* Note: User stats section */}
+            <StatsCard statsOf={'iam'} />
+
             {/* Buttons */}
-            <Box display="flex" justifyContent="flex-end" mb={2}>
+            {/* <Box display="flex" justifyContent="flex-end" mb={2}>
                 <Button
                     variant="contained"
                     startIcon={<SearchIcon />}
@@ -141,7 +149,7 @@ const InventoryAccessManagement = () => {
                 >
                     Add Inventory
                 </Button>
-            </Box>
+            </Box> */}
 
             <Paper>
 

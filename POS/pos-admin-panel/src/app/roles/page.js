@@ -3,11 +3,9 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useTheme } from '@mui/material/styles';
 import {
     Paper,
     Box,
-    Button,
     TableContainer,
     Table,
     TableBody,
@@ -16,46 +14,17 @@ import {
     TablePagination,
     Select,
     MenuItem,
-    InputAdornment
+    Typography,
+    Button
 } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
 import { StyledTableRow, StyledTableCell } from "../../components/mui-sections/mui-sections";
 import PagesNavbar from '@/components/pages-navbar/pages-navbar';
 import StatsCard from '@/components/stats-card/stats-card';
 import Searchbar from '@/components/searchbar/searchbar';
-import { customStyles } from '@/styles/styles';
 import { getAllFeatures, getMatrixDataByFeatureName } from '@/redux/store/actions/roles-actions/roles-actions';
-
-const rolesHeaderData = [
-    { id: "1", label: "roles" },
-    { id: "2", label: "add user" },
-    { id: "3", label: "delete user" },
-    { id: "4", label: "update user" },
-    { id: "5", label: "get user" },
-    { id: "6", label: "view user" },
-    { id: "7", label: "update password" },
-];
-
-const rolesData = [
-    {
-        id: 1,
-        label: "Admin",
-        addUserAccess: true,
-        deleteUserAccess: true,
-        updateUserAccess: true,
-        getUserAccess: true,
-        viewUserAccess: true,
-        updatePasswordAccess: true
-    },
-    { id: 2, label: "Manager", addUserAccess: true, deleteUserAccess: true, updateUserAccess: true, getUserAccess: true, viewUserAccess: true, updatePasswordAccess: true },
-    { id: 3, label: "Editor", addUserAccess: true, deleteUserAccess: false, updateUserAccess: true, getUserAccess: true, viewUserAccess: false, updatePasswordAccess: false },
-    { id: 4, label: "Viewer", addUserAccess: true, deleteUserAccess: false, updateUserAccess: true, getUserAccess: true, viewUserAccess: false, updatePasswordAccess: false },
-    { id: 5, label: "Basic access", addUserAccess: true, deleteUserAccess: false, updateUserAccess: true, getUserAccess: true, viewUserAccess: true, updatePasswordAccess: true }
-];
+import { customStyles } from '@/styles/styles';
 
 const Roles = () => {
-
-    const theme = useTheme();
 
     // Note: Handeling states here...!
     const [searchRoles, setSearchRoles] = useState("");
@@ -108,11 +77,20 @@ const Roles = () => {
 
     return (
         <>
+            {/* Heading Section */}
+            <Box mb={2}>
+                <Typography variant="h4" fontWeight="bold">Roles</Typography>
+
+                <Typography variant="subtitle2" color="textSecondary">
+                    Roles Management
+                </Typography>
+            </Box>
+
             {/* Note: Pages navbar component */}
             <PagesNavbar />
 
             {/* Note: User stats section */}
-            <StatsCard />
+            <StatsCard statsOf={'roles'} />
 
             {/* Note: Table section */}
             <TableContainer
@@ -150,11 +128,11 @@ const Roles = () => {
                                     displayEmpty
                                     sx={{
                                         width: 300,
-                                        paddingLeft : 1,
+                                        paddingLeft: 1,
                                         backgroundColor: 'transparent',
                                         border: 'none',
                                         borderBottom: "1px solid black",
-                                        borderRadius : 0,
+                                        borderRadius: 0,
                                         '&:before': {
                                             border: 'none',
                                         },
@@ -219,13 +197,41 @@ const Roles = () => {
                         {
                             paginatedRolesData?.map((row) => (
                                 <StyledTableRow key={row.id}>
+                                    {/* Note: Role Name */}
                                     <StyledTableCell component="th" scope="row" align="left">
                                         {row.name}
                                     </StyledTableCell>
+
+                                    {/* Note: Actions Mapping */}
+                                    {
+                                        matrixDataByFeatureName?.actionsInFeature?.map((action) => {
+                                            // Note: Check if the action is associated with the role
+                                            const isActionAssociated = matrixDataByFeatureName?.actionsAssociatedWithRole.some(
+                                                (assoc) => assoc.actionId === action.id && assoc.roleId === row.id
+                                            );
+
+                                            return (
+                                                <StyledTableCell
+                                                    key={action.id}
+                                                    align="center"
+                                                >
+                                                    <Button
+                                                    variant="contained"
+                                                    sx={{
+                                                        backgroundColor : isActionAssociated ? "green" : "red"
+                                                    }}
+                                                    >
+                                                    {isActionAssociated ? "Yes" : "No"}
+                                                    </Button>
+                                                </StyledTableCell>
+                                            );
+                                        })
+                                    }
                                 </StyledTableRow>
                             ))
                         }
                     </TableBody>
+
                 </Table>
 
                 {/* Pagination */}

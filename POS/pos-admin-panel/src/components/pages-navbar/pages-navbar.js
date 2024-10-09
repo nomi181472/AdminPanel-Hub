@@ -7,6 +7,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import SecurityIcon from '@mui/icons-material/Security';
 import LayersIcon from '@mui/icons-material/Layers';
 import GroupWorkIcon from '@mui/icons-material/GroupWork';
+import InventoryIcon from '@mui/icons-material/Inventory';
 import { navbarRoutes } from '@/utils/routes/routes';
 
 const PagesNavbar = () => {
@@ -52,27 +53,33 @@ const PagesNavbar = () => {
                 TabIndicatorProps={{ style: { backgroundColor: 'black', height: '2px' } }}
             >
                 <Tab
-                    icon={<PersonIcon sx={{ color: selectedTab === 0 ? 'black' : '#a9a9a9' }} />}
-                    label={<Typography sx={{ fontSize: 12, paddingLeft: 2, color: selectedTab === 0 ? 'black' : '#a9a9a9' }}> Users </Typography>}
+                    icon={<InventoryIcon sx={{ color: selectedTab === 0 ? 'black' : '#a9a9a9' }} />}
+                    label={<Typography sx={{ fontSize: 12, paddingLeft: 2, color: selectedTab === 0 ? 'black' : '#a9a9a9' }}> IAM </Typography>}
                     sx={{ color: selectedTab === 0 ? 'black' : '#a9a9a9', display: "flex", flexDirection: "row" }}
                 />
 
                 <Tab
-                    icon={<SecurityIcon sx={{ color: selectedTab === 1 ? 'black' : '#a9a9a9' }} />}
-                    label={<Typography sx={{ fontSize: 12, paddingLeft: 2, color: selectedTab === 1 ? 'black' : '#a9a9a9' }}> Roles </Typography>}
+                    icon={<PersonIcon sx={{ color: selectedTab === 1 ? 'black' : '#a9a9a9' }} />}
+                    label={<Typography sx={{ fontSize: 12, paddingLeft: 2, color: selectedTab === 1 ? 'black' : '#a9a9a9' }}> Users </Typography>}
                     sx={{ color: selectedTab === 1 ? 'black' : '#a9a9a9', display: "flex", flexDirection: "row" }}
                 />
 
                 <Tab
-                    icon={<LayersIcon sx={{ color: selectedTab === 2 ? 'black' : '#a9a9a9' }} />}
-                    label={<Typography sx={{ fontSize: 12, paddingLeft: 2, color: selectedTab === 2 ? 'black' : '#a9a9a9' }}> Resources </Typography>}
+                    icon={<SecurityIcon sx={{ color: selectedTab === 2 ? 'black' : '#a9a9a9' }} />}
+                    label={<Typography sx={{ fontSize: 12, paddingLeft: 2, color: selectedTab === 2 ? 'black' : '#a9a9a9' }}> Roles </Typography>}
                     sx={{ color: selectedTab === 2 ? 'black' : '#a9a9a9', display: "flex", flexDirection: "row" }}
                 />
 
                 <Tab
-                    icon={<GroupWorkIcon sx={{ color: selectedTab === 3 ? 'black' : '#a9a9a9' }} />}
-                    label={<Typography sx={{ fontSize: 12, paddingLeft: 2, color: selectedTab === 3 ? 'black' : '#a9a9a9' }}> Permissions</Typography>}
+                    icon={<LayersIcon sx={{ color: selectedTab === 3 ? 'black' : '#a9a9a9' }} />}
+                    label={<Typography sx={{ fontSize: 12, paddingLeft: 2, color: selectedTab === 3 ? 'black' : '#a9a9a9' }}> Resources </Typography>}
                     sx={{ color: selectedTab === 3 ? 'black' : '#a9a9a9', display: "flex", flexDirection: "row" }}
+                />
+
+                <Tab
+                    icon={<GroupWorkIcon sx={{ color: selectedTab === 4 ? 'black' : '#a9a9a9' }} />}
+                    label={<Typography sx={{ fontSize: 12, paddingLeft: 2, color: selectedTab === 4 ? 'black' : '#a9a9a9' }}> Permissions</Typography>}
+                    sx={{ color: selectedTab === 4 ? 'black' : '#a9a9a9', display: "flex", flexDirection: "row" }}
                 />
             </Tabs>
         </Paper>

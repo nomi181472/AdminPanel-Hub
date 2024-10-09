@@ -14,7 +14,8 @@ import {
     TableHead,
     TableRow,
     Paper,
-    TablePagination
+    TablePagination,
+    Typography
 } from '@mui/material';
 import { Search as SearchIcon, Visibility, Edit, Delete } from '@mui/icons-material';
 import PagesNavbar from '@/components/pages-navbar/pages-navbar';
@@ -146,13 +147,22 @@ const Users = () => {
     }, []);
 
     return (
-        <Box>
+        <Box sx={{ padding: 0 }}>
+
+            {/* Heading Section */}
+            <Box mb={2}>
+                <Typography variant="h4" fontWeight="bold">Users</Typography>
+                
+                <Typography variant="subtitle2" color="textSecondary">
+                    Users Management
+                </Typography>
+            </Box>
 
             {/* Note: Pages navbar component */}
             <PagesNavbar />
 
             {/* Note: User stats section */}
-            <StatsCard />
+            <StatsCard statsOf={'users'} />
 
             {/* Table section */}
             <Paper>
