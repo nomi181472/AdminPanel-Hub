@@ -4,8 +4,7 @@
 
 import * as React from 'react';
 import { useState, useEffect } from "react";
-import { useRouter } from 'next/navigation';
-import { useSelector } from "react-redux";
+import { useRouter, usePathname } from 'next/navigation';
 
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box';
@@ -23,15 +22,17 @@ const AppLayOut = (props) => {
 
   // Note: Handeling navigation here...!
   const router = useRouter();
+  const pathName = usePathname();
+  // console.log('Pathname: ', pathName);
 
   // Note: Drawer handelers...!
   const handleDrawerOpen = () => setOpenDrawer(true);
   const handleDrawerClose = () => setOpenDrawer(false);
 
-  // Note: When this component mounted then this hook will run...!
+  // Note: This hook will run when pathname update...!
   useEffect(() => {
-    router.push("/dashboard");
-  }, []);
+    if (pathName == "/") router.push("/dashboard");
+  }, [pathName]);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -49,10 +50,29 @@ const AppLayOut = (props) => {
       />
 
       {/* Note: Content section */}
-      <Main open={openDrawer}>
+      <Main
+        open={openDrawer}
+        sx={{
+          flexGrow: 1,
+          marginLeft: openDrawer ? '0px' : '0px',
+          transition: 'margin 0.3s ease',
+          padding: { xs: '16px', sm: '24px', md: '32px' },
+          display: 'flex',
+          justifyContent: 'center',
+          marginTop: '2%',
+        }}
+      >
         <DrawerHeader />
 
-        <Container maxWidth="xl">
+        <Container
+          maxWidth="xl"
+          sx={{
+            width: '100%',
+            padding: { xs: '8px', sm: '16px', md: '24px' },
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
           {props?.children}
         </Container>
       </Main>
@@ -62,14 +82,13 @@ const AppLayOut = (props) => {
 
 const RenderAppLayOut = (props) => {
 
-  // Note: Fetching data from redux...!
-  // const { authenticatedUser } = useSelector((state) => state.authStates);
-  // console.log("User: ", authenticatedUser);
-
-  const authenticatedUser = true;
+  // Note: Verifying user authentication...!
+  // const isUserAuthenticated = getCookie("UserAuthenticated");
+  const isUserAuthenticated = localStorage.getItem("AuthToken");
+  // console.log("isUserAuthenticated: ", isUserAuthenticated);
 
   return (
-    (authenticatedUser)
+    (isUserAuthenticated)
       ?
       (<AppLayOut {...props} />)
       :

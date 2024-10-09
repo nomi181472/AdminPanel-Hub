@@ -12,6 +12,9 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from '@/styles/theme';
 
+// Note: React activity configuration...!
+import "react-activity/dist/library.css"; 
+
 // Note: Global css file...!
 import "./globals.css";
 

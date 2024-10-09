@@ -3,10 +3,12 @@
 import { NextResponse } from 'next/server';
 import { unAuthenticatedRoutes, authenticatedRoutes } from './utils/routes/routes'; // Routes...!
 
-const isUserLoggedIn = true;
-
 // Note: Middleware handler...!
 const middleware = (req) => {
+
+    const isUserLoggedIn = req.cookies.get('UserAuthenticated');
+    // console.log('user authentication status: ', isUserLoggedIn);
+
     const { pathname } = req.nextUrl;
 
     // Note: If user is not logged in...!

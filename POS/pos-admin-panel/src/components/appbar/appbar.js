@@ -9,14 +9,20 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import Badge from '@mui/material/Badge';
 
 import { AppBar } from '../mui-sections/mui-sections';
+import { customStyles } from '@/styles/styles';
+
+import styles from "./appbar.module.css";
 
 const AppNavBar = (props) => {
     const { openDrawer, openDrawerHandler } = props;
 
     // Note: Handeling states here...!
     const [anchorEl, setAnchorEl] = useState(null);
+    const unreadNotification = 17;
 
     // Note: Open and close menu's handler...!
     const handleMenu = (event) => setAnchorEl(event.currentTarget);
@@ -26,11 +32,13 @@ const AppNavBar = (props) => {
         <AppBar
             position="fixed"
             open={openDrawer}
+            sx={{
+                backgroundColor: customStyles.colors.black
+            }}
         >
             <Toolbar>
                 {/* Drawer Icon */}
                 <IconButton
-                    color="inherit"
                     aria-label="open drawer"
                     onClick={openDrawerHandler}
                     edge="start"
@@ -39,13 +47,25 @@ const AppNavBar = (props) => {
                         openDrawer && { display: 'none' },
                     ]}
                 >
-                    <MenuIcon />
+                    <MenuIcon sx={{ color: customStyles.colors.white }} />
                 </IconButton>
 
                 {/* Title */}
-                <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
+                <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, color: customStyles.colors.white }}>
                     POS Admin Panel
                 </Typography>
+
+                {/* Notification icon */}
+                <IconButton
+                    size="large"
+                    aria-label="show 17 new notifications"
+                    color="inherit"
+                >
+                    <Badge badgeContent={unreadNotification} color="error">
+                        {/* <NotificationsIcon /> */}
+                        <NotificationsIcon className={unreadNotification > 0 ? styles.animateNotification : ''} />
+                    </Badge>
+                </IconButton>
 
                 {/* User Icon with Dropdown */}
                 <IconButton
@@ -59,6 +79,7 @@ const AppNavBar = (props) => {
                 >
                     <AccountCircle />
                 </IconButton>
+
                 <Menu
                     id="menu-appbar"
                     anchorEl={anchorEl}
