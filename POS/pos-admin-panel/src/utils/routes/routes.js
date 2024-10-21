@@ -20,6 +20,7 @@ const authenticatedRoutes = [
     "/inventory-access-management",
     "/users",
     "/roles",
+    "/inventory",
 ];
 
 const appRoutes = [
@@ -36,6 +37,13 @@ const appRoutes = [
         path: authenticatedRoutes[2],
         icon: InventoryAccessManagementIcon
     },
+
+    {
+        id: 3,
+        label: 'Inventory',
+        path: authenticatedRoutes[5],
+        icon: InventoryIcon
+    },
 ];
 
 const navbarRoutes = [
@@ -43,7 +51,7 @@ const navbarRoutes = [
         id: 0,
         label: 'Inventory Access Management',
         path: authenticatedRoutes[2],
-        icon: InventoryIcon
+        icon: InventoryAccessManagementIcon
     },
 
     {

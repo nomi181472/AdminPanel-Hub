@@ -79,7 +79,7 @@ const InventoryAccessManagement = () => {
     // Note: Handeling states here...!
     const [searchText, setSearchText] = useState('');
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [rowsPerPage, setRowsPerPage] = useState(4);
 
     // Note: Form onChange handler...!
     const handleSearchChange = (event) => {
@@ -110,7 +110,10 @@ const InventoryAccessManagement = () => {
 
             {/* Heading Section */}
             <Box mb={2}>
-                <Typography variant="h4" fontWeight="bold">Inventory</Typography>
+                <Typography variant="h5" fontWeight="bold">
+                    Inventory
+                </Typography>
+
                 <Typography variant="subtitle2" color="textSecondary">
                     Inventory Access Management
                 </Typography>

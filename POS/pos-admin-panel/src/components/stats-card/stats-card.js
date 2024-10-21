@@ -12,7 +12,7 @@ const IAMStatsCard = () => {
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                p: 3,
+                p: 1.5,
                 bgcolor: 'white',
                 borderRadius: 2,
                 boxShadow: 2,
@@ -23,7 +23,7 @@ const IAMStatsCard = () => {
             }}
         >
             <Box>
-                <Typography variant="h4" fontWeight="bold">
+                <Typography variant="h5" fontWeight="bold">
                     500
                 </Typography>
 
@@ -33,7 +33,7 @@ const IAMStatsCard = () => {
             </Box>
 
             <Box>
-                <Typography variant="h4" fontWeight="bold">
+                <Typography variant="h5" fontWeight="bold">
                     02
                 </Typography>
 
@@ -43,7 +43,7 @@ const IAMStatsCard = () => {
             </Box>
 
             <Box display="flex" alignItems="center">
-                <Typography variant="h4" fontWeight="bold">
+                <Typography variant="h5" fontWeight="bold">
                     05
                 </Typography>
 
@@ -70,10 +70,17 @@ const IAMStatsCard = () => {
                     textTransform: 'none',
                     '&:hover': {
                         bgcolor: 'black',
+                        '& .rotate-text': {
+                            transform: 'rotateY(180deg)', // Rotate text horizontally
+                        },
+                    },
+                    '& .rotate-text': {
+                        display: 'inline-block',
+                        transition: 'transform 0.5s ease-in-out', // Smooth animation for the text
                     },
                 }}
             >
-                Add New Inventory
+                <span className="rotate-text">Add New Inventory</span>
             </Button>
         </Box>
     );
@@ -82,10 +89,12 @@ const IAMStatsCard = () => {
 
 
 // Note: User stats card component...!
-const UserStatsCard = () => {
+const UserStatsCard = (props) => {
+    // console.log('Props of user stats card component: ', props);
+    const { funcHandler } = props;
 
     // Note: Fetching data from redux...!
-    const { totalUserCount } = useSelector(({ userStates }) => { return userStates });
+    const { totalUserCount, usersList } = useSelector(({ userStates }) => { return userStates });
     // console.log("Total users: ", totalUserCount);
 
     return (
@@ -94,7 +103,7 @@ const UserStatsCard = () => {
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                p: 3,
+                p: 1.5,
                 bgcolor: 'white',
                 borderRadius: 2,
                 boxShadow: 2,
@@ -105,7 +114,7 @@ const UserStatsCard = () => {
             }}
         >
             <Box>
-                <Typography variant="h4" fontWeight="bold">
+                <Typography variant="h5" fontWeight="bold">
                     {totalUserCount ? totalUserCount : 0}
                 </Typography>
 
@@ -115,8 +124,8 @@ const UserStatsCard = () => {
             </Box>
 
             <Box>
-                <Typography variant="h4" fontWeight="bold">
-                    32 342
+                <Typography variant="h5" fontWeight="bold">
+                    {[...usersList].filter((item) => { return item?.isActive })?.length}
                 </Typography>
 
                 <Typography variant="body2" color="text.secondary">
@@ -125,7 +134,7 @@ const UserStatsCard = () => {
             </Box>
 
             <Box display="flex" alignItems="center">
-                <Typography variant="h4" fontWeight="bold">
+                <Typography variant="h5" fontWeight="bold">
                     32
                 </Typography>
 
@@ -145,6 +154,7 @@ const UserStatsCard = () => {
             </Box>
 
             <Button
+                onClick={funcHandler}
                 variant="contained"
                 sx={{
                     bgcolor: 'black',
@@ -152,10 +162,17 @@ const UserStatsCard = () => {
                     textTransform: 'none',
                     '&:hover': {
                         bgcolor: 'black',
+                        '& .rotate-text': {
+                            transform: 'rotateY(180deg)', // Rotate text horizontally
+                        },
+                    },
+                    '& .rotate-text': {
+                        display: 'inline-block',
+                        transition: 'transform 0.5s ease-in-out', // Smooth animation for the text
                     },
                 }}
             >
-                Add New User
+                <span className="rotate-text">Add New User</span>
             </Button>
         </Box>
     );
@@ -164,14 +181,21 @@ const UserStatsCard = () => {
 
 
 // Note: Roles stats card component...!
-const RolesStatsCard = () => {
+const RolesStatsCard = (props) => {
+    // console.log('Props of user stats card component: ', props);
+    const { funcHandler } = props;
+
+    // Note: Fetching data from redux...!
+    const { roles } = useSelector(({ roleStates }) => { return roleStates });
+    // console.log('Roles: ', roles);
+
     return (
         <Box
             sx={{
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                p: 3,
+                p: 1.5,
                 bgcolor: 'white',
                 borderRadius: 2,
                 boxShadow: 2,
@@ -182,8 +206,8 @@ const RolesStatsCard = () => {
             }}
         >
             <Box>
-                <Typography variant="h4" fontWeight="bold">
-                    50
+                <Typography variant="h5" fontWeight="bold">
+                    {roles?.length}
                 </Typography>
 
                 <Typography variant="body2" color="text.secondary">
@@ -192,8 +216,8 @@ const RolesStatsCard = () => {
             </Box>
 
             <Box>
-                <Typography variant="h4" fontWeight="bold">
-                    450
+                <Typography variant="h5" fontWeight="bold">
+                    {[...roles].filter((item) => { return item?.isActive })?.length}
                 </Typography>
 
                 <Typography variant="body2" color="text.secondary">
@@ -202,7 +226,7 @@ const RolesStatsCard = () => {
             </Box>
 
             <Box display="flex" alignItems="center">
-                <Typography variant="h4" fontWeight="bold">
+                <Typography variant="h5" fontWeight="bold">
                     10
                 </Typography>
 
@@ -222,6 +246,7 @@ const RolesStatsCard = () => {
             </Box>
 
             <Button
+                onClick={funcHandler}
                 variant="contained"
                 sx={{
                     bgcolor: 'black',
@@ -229,10 +254,17 @@ const RolesStatsCard = () => {
                     textTransform: 'none',
                     '&:hover': {
                         bgcolor: 'black',
+                        '& .rotate-text': {
+                            transform: 'rotateY(180deg)', // Rotate text horizontally
+                        },
+                    },
+                    '& .rotate-text': {
+                        display: 'inline-block',
+                        transition: 'transform 0.5s ease-in-out', // Smooth animation for the text
                     },
                 }}
             >
-                Add New Role
+                <span className="rotate-text">Add New Role</span>
             </Button>
         </Box>
     );
@@ -242,13 +274,13 @@ const RolesStatsCard = () => {
 
 // Note: RenderStats component...!
 const RenderStats = (props) => {
-    const { statsOf } = props;
-    // console.log('Props of render stats component: ', statsOf);
+    // console.log('Props of render stats component: ', props);
+    const { statsOf, handler } = props;
 
     const renderStatsHandler = () => {
         if (statsOf == "iam") return <IAMStatsCard />
-        else if (statsOf == "users") return <UserStatsCard />
-        else if (statsOf == "roles") return <RolesStatsCard />
+        else if (statsOf == "users") return <UserStatsCard funcHandler={handler} />
+        else if (statsOf == "roles") return <RolesStatsCard funcHandler={handler} />
     };
 
     return (<> {renderStatsHandler()} </>);

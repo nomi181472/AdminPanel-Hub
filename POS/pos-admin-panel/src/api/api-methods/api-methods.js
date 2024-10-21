@@ -4,7 +4,8 @@ const apiCallMethods = {
     post: "POST",
     get: "GET",
     put: "PUT",
-    delete: "DELETE"
+    delete: "DELETE",
+    patch: "PATCH"
 };
 
 export default apiCallMethods;

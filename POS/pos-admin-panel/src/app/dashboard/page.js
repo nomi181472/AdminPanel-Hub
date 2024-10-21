@@ -108,6 +108,7 @@ const Dashboard = () => {
                         flex: '1 1 auto',
                         height: { xs: '300px', lg: '500px' }, // Adjust the height for mobile and desktop
                         width: { xs: '100%', lg: '48%' }, // Full width on mobile, 48% on larger screens
+                        mb: { xs: 2, lg: 0 } // Add margin at the bottom for mobile
                     }}
                 >
                     <Typography variant="h6" mb={2}>

@@ -22,7 +22,6 @@ import IconButton from '@mui/material/IconButton';
 import Lottie from 'lottie-react';
 
 import styles from "./login.module.css";
-import { customStyles } from '@/styles/styles';
 import AuthBGLottie from "../../../public/lottie/auth-bg-animation.json";
 import messages from '@/utils/messages/messages';
 import ShowMessage from '@/components/toast-message/toast-message';

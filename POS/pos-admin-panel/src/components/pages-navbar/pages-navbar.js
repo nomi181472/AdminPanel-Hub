@@ -42,7 +42,6 @@ const PagesNavbar = () => {
                 bgcolor: 'white',
                 padding: '10px 0',
                 borderRadius: 0,
-                marginTop: 3,
                 marginBottom: 3
             }}
         >
