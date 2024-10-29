@@ -7,6 +7,7 @@ import RolesIcon from '@mui/icons-material/Api';
 import ResourcesIcon from '@mui/icons-material/Layers';
 import PermissionsIcon from '@mui/icons-material/Badge';
 import InventoryIcon from '@mui/icons-material/Inventory';
+import ActionsIcon from '@mui/icons-material/Attractions';
 
 const unAuthenticatedRoutes = [
     "/login",
@@ -21,6 +22,7 @@ const authenticatedRoutes = [
     "/users",
     "/roles",
     "/inventory",
+    "/actions"
 ];
 
 const appRoutes = [
@@ -70,13 +72,20 @@ const navbarRoutes = [
 
     {
         id: 3,
+        label: 'actions',
+        path: authenticatedRoutes[6],
+        icon: ActionsIcon
+    },
+
+    {
+        id: 4,
         label: 'resources',
         path: "/",
         icon: ResourcesIcon
     },
 
     {
-        id: 4,
+        id: 5,
         label: 'permissions',
         path: "/",
         icon: PermissionsIcon

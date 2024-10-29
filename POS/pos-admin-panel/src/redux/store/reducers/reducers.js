@@ -8,6 +8,7 @@ import storage from "redux-persist/lib/storage";
 import authReducer from './auth-reducer/auth-reducer';
 import userReducer from "./user-reducer/user-reducer";
 import rolesReducer from "./roles-reducer/roles-reducer";
+import actionReducer from './actions-reducer/actions-reducer';
 
 // Note: Persist reducer configuration...!
 const persistConfig = {
@@ -20,7 +21,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
     authStates: authReducer,
     userStates: userReducer,
-    roleStates : rolesReducer
+    roleStates : rolesReducer,
+    actionsStates : actionReducer
 });
 
 export default persistReducer(persistConfig, rootReducer);

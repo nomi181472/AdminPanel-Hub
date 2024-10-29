@@ -23,13 +23,13 @@ import { StyledTableRow, StyledTableCell } from "../../components/mui-sections/m
 import PagesNavbar from '@/components/pages-navbar/pages-navbar';
 import StatsCard from '@/components/stats-card/stats-card';
 import Searchbar from '@/components/searchbar/searchbar';
-import RoleDialog from '@/components/role-dialog/role-dialog';
 import ShowMessage from '@/components/toast-message/toast-message';
 import ScreenLoader from '@/components/screen-loader/screen-loader';
+import RoleDialog from '@/components/role-dialog/role-dialog';
+import ConfirmActionDialog from '@/components/confirm-action-dialog/confirm-action-dialog';
 import messages from '@/utils/messages/messages';
 import { getAllFeatures, getMatrixDataByFeatureName } from '@/redux/store/actions/roles-actions/roles-actions';
 import { customStyles } from '@/styles/styles';
-import ConfirmActionDialog from '@/components/confirm-action-dialog/confirm-action-dialog';
 
 const Roles = () => {
 

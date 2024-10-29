@@ -1,9 +1,8 @@
-// Note: ConfirmActionDialog component...!
+// Note: ActionFeatureDialog component...!
 
 import React, { useState, useEffect, memo } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-    Button,
     Dialog,
     DialogActions,
     DialogContent,
@@ -13,88 +12,66 @@ import {
     IconButton,
     Tooltip
 } from '@mui/material';
-import { Delete, Edit, Close, Done } from '@mui/icons-material';
+import { Delete, Edit, Close, CheckCircle } from '@mui/icons-material';
 import { customStyles } from '@/styles/styles';
 import {
-    getAllFeatures,
-    deleteRole,
-    updateRole
-} from '@/redux/store/actions/roles-actions/roles-actions';
+    getAllActions,
+    deleteAction
+} from '@/redux/store/actions/action-feature-actions/action-feature-actions';
+import messages from '@/utils/messages/messages';
 
-const ConfirmActionDialog = (props) => {
-    const { open, close, rowData, roleSuccess } = props;
+const ActionFeatureDialog = (props) => {
+    const { open, close, rowData, displayMessageHandler } = props;
     // console.log("Props of action dialog component: ", props);
 
-    // Note: Handling redux here...!
-    const dispatch = useDispatch();
-
-    // Note: Handling states here...!
+    // Handling states...!
     const [isEditMode, setIsEditMode] = useState(false);
-    const [roleName, setRoleName] = useState('');
+    const [actionName, setActionName] = useState('');
+
+    // Handling redux here...!
+    const dispatch = useDispatch();
 
     // Note: Handle Esc key press to close the dialog...!
     const handleKeyDown = (event) => {
         if (event.key === 'Escape') close();
     };
 
-    // Note: Delete role API response handler...!
-    const delResHandler = (res) => {
+    // Note: Delete and update API response handler...!
+    const resHandler = (res) => {
         // 200:
         if (res && res?.status === 200) {
-            dispatch(getAllFeatures());
-            roleSuccess("200", "Role deleted successfully");
+            dispatch(getAllActions());
+            displayMessageHandler('Action deleted successfully', messages.success);
             close();
-        };
+        }
 
-        // 400:
+        // Note: All other status codes:
         if (res && res?.status !== 200) {
-            roleSuccess("400", res?.data?.message);
-            close();
-        };
+            console.log('res: ', res);
+        }
     };
 
-    // Note: Delete role handler...!
+    // Note: Delete action handler...!
     const handleDelete = () => {
-        const deleteRow = { roleId: rowData?.id };
-        deleteRow && dispatch(deleteRole(deleteRow, delResHandler));
+        rowData && dispatch(deleteAction(rowData?.id, resHandler));
     };
 
-    // Note: Delete role API response handler...!
-    const updateResHandler = (res) => {
-        // 200:
-        if (res && res?.status === 200) {
-            dispatch(getAllFeatures());
-            roleSuccess("200", "Role updated successfully");
-            close();
-        };
-
-        // 400:
-        if (res && res?.status !== 200) {
-            roleSuccess("400", res?.data?.message);
-            close();
-        };
-    };
-
-
-    // Note: Edit action - show input field...!
+    // Note: Edit action handler...!
     const handleEdit = () => {
+        close();
         setIsEditMode(true);
-        setRoleName(rowData?.name);
+        setActionName(rowData?.name);
     };
 
-    // Handle role name update
+    // Note: Update action handler...!
     const handleUpdate = () => {
-        const updateRoleData = {
-            roleId: rowData?.id,
-            roleName: roleName
-        };
-        updateRoleData && dispatch(updateRole(updateRoleData, updateResHandler));
+        close();
     };
 
-    // Note: THis hook will run when close handler run...!
+    // Note: This action will update when close handler work...!
     useEffect(() => {
         setIsEditMode(false);
-        setRoleName("");
+        setActionName('');
     }, [close]);
 
     return (
@@ -117,9 +94,9 @@ const ConfirmActionDialog = (props) => {
                     {/* Show TextField only when in edit mode */}
                     {isEditMode && (
                         <TextField
-                            label="Role Name"
-                            value={roleName}
-                            onChange={(e) => setRoleName(e.target.value)}
+                            label="Action Name"
+                            value={actionName}
+                            onChange={(e) => setActionName(e.target.value)}
                             fullWidth
                             margin="dense"
                         />
@@ -127,15 +104,15 @@ const ConfirmActionDialog = (props) => {
                 </DialogContent>
 
                 <DialogActions>
-                    {/* Show "Update" button when in edit mode */}
+                    {/* Show "Update" button with icon when in edit mode */}
                     {isEditMode ? (
                         <Tooltip title="Update">
                             <IconButton
-                                onClick={handleUpdate}
-                                disabled={roleName.trim().length < 1}
                                 sx={{ color: customStyles.colors.black }}
+                                onClick={handleUpdate}
+                                disabled={actionName.trim().length < 1}
                             >
-                                <Done />
+                                <CheckCircle />
                             </IconButton>
                         </Tooltip>
                     ) : (
@@ -159,10 +136,20 @@ const ConfirmActionDialog = (props) => {
                             </Tooltip>
                         </>
                     )}
+
+                    {/* <Tooltip title="Cancel">
+                        <IconButton
+                            onClick={close}
+                            color="secondary"
+                            sx={{ color: customStyles.colors.black }}
+                        >
+                            <Close />
+                        </IconButton>
+                    </Tooltip> */}
                 </DialogActions>
             </Dialog>
         </div>
     );
 };
 
-export default memo(ConfirmActionDialog);
+export default memo(ActionFeatureDialog);

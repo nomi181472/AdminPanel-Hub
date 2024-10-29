@@ -8,6 +8,7 @@ import SecurityIcon from '@mui/icons-material/Security';
 import LayersIcon from '@mui/icons-material/Layers';
 import GroupWorkIcon from '@mui/icons-material/GroupWork';
 import InventoryIcon from '@mui/icons-material/Inventory';
+import ActionsIcon from '@mui/icons-material/Attractions';
 import { navbarRoutes } from '@/utils/routes/routes';
 
 const PagesNavbar = () => {
@@ -70,15 +71,23 @@ const PagesNavbar = () => {
                 />
 
                 <Tab
-                    icon={<LayersIcon sx={{ color: selectedTab === 3 ? 'black' : '#a9a9a9' }} />}
-                    label={<Typography sx={{ fontSize: 12, paddingLeft: 2, color: selectedTab === 3 ? 'black' : '#a9a9a9' }}> Resources </Typography>}
+                    icon={<ActionsIcon sx={{ color: selectedTab === 3 ? 'black' : '#a9a9a9' }} />}
+                    label={<Typography sx={{ fontSize: 12, paddingLeft: 2, color: selectedTab === 3 ? 'black' : '#a9a9a9' }}> Actions </Typography>}
                     sx={{ color: selectedTab === 3 ? 'black' : '#a9a9a9', display: "flex", flexDirection: "row" }}
+                />
+
+                <Tab
+                    icon={<LayersIcon sx={{ color: selectedTab === 4 ? 'black' : '#a9a9a9' }} />}
+                    label={<Typography sx={{ fontSize: 12, paddingLeft: 2, color: selectedTab === 4 ? 'black' : '#a9a9a9' }}> Resources </Typography>}
+                    sx={{ color: selectedTab === 4 ? 'black' : '#a9a9a9', display: "flex", flexDirection: "row" }}
+                    disabled
                 />
 
                 <Tab
                     icon={<GroupWorkIcon sx={{ color: selectedTab === 4 ? 'black' : '#a9a9a9' }} />}
                     label={<Typography sx={{ fontSize: 12, paddingLeft: 2, color: selectedTab === 4 ? 'black' : '#a9a9a9' }}> Permissions</Typography>}
                     sx={{ color: selectedTab === 4 ? 'black' : '#a9a9a9', display: "flex", flexDirection: "row" }}
+                    disabled
                 />
             </Tabs>
         </Paper>

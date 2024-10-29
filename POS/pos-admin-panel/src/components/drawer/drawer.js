@@ -24,6 +24,7 @@ import { customStyles } from '@/styles/styles';
 import { logOutUser } from '@/redux/store/actions/auth-actions/auth-actions';
 import { clearAllUserStates } from '@/redux/store/actions/user-actions/user-actions';
 import { clearAllRolesStates } from '@/redux/store/actions/roles-actions/roles-actions';
+import { clearAllActionStates } from '@/redux/store/actions/action-feature-actions/action-feature-actions';
 
 const AppDrawer = (props) => {
     const { openDrawer, closeDrawer } = props;
@@ -60,6 +61,7 @@ const AppDrawer = (props) => {
             dispatch(logOutUser());
             dispatch(clearAllUserStates());
             dispatch(clearAllRolesStates());
+            dispatch(clearAllActionStates());
         }, 3000);
     };
 

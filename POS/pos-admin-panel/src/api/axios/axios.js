@@ -41,7 +41,7 @@ instance.interceptors.response.use(
     (error) => {
         // Check for network error (e.g., no response received)
         if (!error.response) {
-            const netDisconnectedOrServerLoss = !error.response;
+            const netDisconnectedOrServerLoss = error;
             console.log("Internet disconnected or server loss: " , netDisconnectedOrServerLoss);
             alert("Network error: Please check your internet connection.");
         };

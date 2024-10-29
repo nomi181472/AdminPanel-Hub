@@ -2,7 +2,16 @@
 
 import React, { memo } from 'react';
 import { useSelector } from 'react-redux';
-import { Box, Typography, Button, Chip } from '@mui/material';
+import {
+    Box,
+    Typography,
+    Chip,
+    Tooltip,
+    IconButton
+} from '@mui/material';
+
+import { Add } from '@mui/icons-material';
+import { customStyles } from '@/styles/styles';
 
 // Note: Roles stats card component...!
 const IAMStatsCard = () => {
@@ -62,26 +71,13 @@ const IAMStatsCard = () => {
                 </Typography>
             </Box>
 
-            <Button
-                variant="contained"
-                sx={{
-                    bgcolor: 'black',
-                    color: 'white',
-                    textTransform: 'none',
-                    '&:hover': {
-                        bgcolor: 'black',
-                        '& .rotate-text': {
-                            transform: 'rotateY(180deg)', // Rotate text horizontally
-                        },
-                    },
-                    '& .rotate-text': {
-                        display: 'inline-block',
-                        transition: 'transform 0.5s ease-in-out', // Smooth animation for the text
-                    },
-                }}
-            >
-                <span className="rotate-text">Add New Inventory</span>
-            </Button>
+            <Tooltip title="Add New Inventory">
+                <IconButton
+                    aria-label="add inventory"
+                >
+                    <Add sx={{ color: customStyles.colors.black }} />
+                </IconButton>
+            </Tooltip>
         </Box>
     );
 };
@@ -153,27 +149,14 @@ const UserStatsCard = (props) => {
                 </Typography>
             </Box>
 
-            <Button
-                onClick={funcHandler}
-                variant="contained"
-                sx={{
-                    bgcolor: 'black',
-                    color: 'white',
-                    textTransform: 'none',
-                    '&:hover': {
-                        bgcolor: 'black',
-                        '& .rotate-text': {
-                            transform: 'rotateY(180deg)', // Rotate text horizontally
-                        },
-                    },
-                    '& .rotate-text': {
-                        display: 'inline-block',
-                        transition: 'transform 0.5s ease-in-out', // Smooth animation for the text
-                    },
-                }}
-            >
-                <span className="rotate-text">Add New User</span>
-            </Button>
+            <Tooltip title="Add User">
+                <IconButton
+                    aria-label="add user"
+                    onClick={funcHandler}
+                >
+                    <Add sx={{ color: customStyles.colors.black }} />
+                </IconButton>
+            </Tooltip>
         </Box>
     );
 };
@@ -245,27 +228,14 @@ const RolesStatsCard = (props) => {
                 </Typography>
             </Box>
 
-            <Button
-                onClick={funcHandler}
-                variant="contained"
-                sx={{
-                    bgcolor: 'black',
-                    color: 'white',
-                    textTransform: 'none',
-                    '&:hover': {
-                        bgcolor: 'black',
-                        '& .rotate-text': {
-                            transform: 'rotateY(180deg)', // Rotate text horizontally
-                        },
-                    },
-                    '& .rotate-text': {
-                        display: 'inline-block',
-                        transition: 'transform 0.5s ease-in-out', // Smooth animation for the text
-                    },
-                }}
-            >
-                <span className="rotate-text">Add New Role</span>
-            </Button>
+            <Tooltip title="Add New Role">
+                <IconButton
+                    aria-label="add role"
+                    onClick={funcHandler}
+                >
+                    <Add sx={{ color: customStyles.colors.black }} />
+                </IconButton>
+            </Tooltip>
         </Box>
     );
 };
