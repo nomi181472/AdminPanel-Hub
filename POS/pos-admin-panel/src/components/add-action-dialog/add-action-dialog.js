@@ -46,6 +46,7 @@ const AddActionDialog = (props) => {
         setFeature("");
         setAction("");
         setAllFeatures([]);
+        setFilterFeatures([]);
         setAllActions([]);
     };
 
@@ -58,6 +59,7 @@ const AddActionDialog = (props) => {
         setFeature("");
         setAction("");
         setAllFeatures([]);
+        setFilterFeatures([]);
         setAllActions([]);
 
         const findFeaturesAndActions = [...overAllActions].find((item, index) => { return item?.apiName == val })?.routes;
