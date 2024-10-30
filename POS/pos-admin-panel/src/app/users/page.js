@@ -30,7 +30,8 @@ import { getAllRoles } from '@/redux/store/actions/roles-actions/roles-actions';
 import {
     getTotalUsersCount,
     fetchAllUsers,
-    deleteUser
+    deleteUser,
+    getNewUsersByMonth
 }
     from '@/redux/store/actions/user-actions/user-actions';
 import { customStyles } from '@/styles/styles';
@@ -165,6 +166,9 @@ const Users = () => {
             dispatch(getTotalUsersCount());
             dispatch(fetchAllUsers());
             dispatch(getAllRoles());
+
+            const currentMonth = new Date().getMonth();
+            dispatch(getNewUsersByMonth(currentMonth + 1));
         };
     }, []);
 
@@ -254,6 +258,7 @@ const Users = () => {
                                             filteredRows
                                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                                 .map((row, index) => (
+                                                    // row?.name == "SuperAdmin" ? null :
                                                     <TableRow key={row.id}>
                                                         <TableCell>{index + 1}</TableCell>
                                                         <TableCell>{row?.userId.slice(0, 5)}</TableCell>

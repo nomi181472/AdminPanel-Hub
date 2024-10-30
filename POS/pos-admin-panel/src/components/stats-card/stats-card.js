@@ -90,8 +90,9 @@ const UserStatsCard = (props) => {
     const { funcHandler } = props;
 
     // Note: Fetching data from redux...!
-    const { totalUserCount, usersList } = useSelector(({ userStates }) => { return userStates });
+    const { totalUserCount, usersList, newUsersCountByMonth } = useSelector(({ userStates }) => { return userStates });
     // console.log("Total users: ", totalUserCount);
+    console.log("New Users Count By Month: ", newUsersCountByMonth);
 
     return (
         <Box
@@ -131,21 +132,11 @@ const UserStatsCard = (props) => {
 
             <Box display="flex" alignItems="center">
                 <Typography variant="h5" fontWeight="bold">
-                    32
+                    {newUsersCountByMonth}
                 </Typography>
 
-                <Chip
-                    label="21% up"
-                    size="small"
-                    sx={{
-                        ml: 1,
-                        bgcolor: '#E0E0E0',
-                        color: 'black',
-                    }}
-                />
-
                 <Typography variant="body2" color="text.secondary" sx={{ ml: 1 }}>
-                    New Users
+                    {`New User${newUsersCountByMonth > 0 ? 's' : ""}`}
                 </Typography>
             </Box>
 

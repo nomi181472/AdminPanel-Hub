@@ -146,12 +146,20 @@ const AddActionDialog = (props) => {
                     clearStates();
                     // };
                 }}
+                PaperProps={{
+                    style: {
+                        borderRadius: 15,
+                        padding: "20px",
+                        backgroundColor: 'whitesmoke'
+                        // background: "linear-gradient(135deg, #f3e7e9 0%, #e3eeff 100%)"
+                    }
+                }}
             >
-                <DialogTitle>Select Options</DialogTitle>
+                <DialogTitle style={{ fontWeight: "bold", color: "#333" }}>Select Options</DialogTitle>
                 <DialogContent>
 
                     {/* Module Dropdown */}
-                    <Typography variant="subtitle1" sx={{ mt: 2 }}>
+                    <Typography variant="subtitle1" sx={{ mt: 2, color: "#555" }}>
                         Select Module
                     </Typography>
 
@@ -166,6 +174,12 @@ const AddActionDialog = (props) => {
                             value={module}
                             label="Module"
                             onChange={onChangeForModule}
+                            style={{ backgroundColor: "white", borderRadius: 5 }}
+                            MenuProps={{
+                                PaperProps: {
+                                    style: { maxHeight: 300, borderRadius: 10 }
+                                }
+                            }}
                         >
                             {
                                 overAllActions.map((item, index) => {
@@ -173,6 +187,7 @@ const AddActionDialog = (props) => {
                                         <MenuItem
                                             key={item?.apiName}
                                             value={item?.apiName}
+                                            style={{ display: "flex", alignItems: "center" }}
                                         >
                                             {item?.apiName}
                                         </MenuItem>
@@ -183,7 +198,7 @@ const AddActionDialog = (props) => {
                     </FormControl>
 
                     {/* Feature Dropdown */}
-                    <Typography variant="subtitle1" sx={{ mt: 3 }}>
+                    <Typography variant="subtitle1" sx={{ mt: 2, color: "#555" }}>
                         Select Feature
                     </Typography>
 
@@ -199,6 +214,12 @@ const AddActionDialog = (props) => {
                             label="Feature"
                             onChange={(e) => setFeature(e.target.value)}
                             disabled={!module}
+                            style={{ backgroundColor: "white", borderRadius: 5 }}
+                            MenuProps={{
+                                PaperProps: {
+                                    style: { maxHeight: 300, borderRadius: 10 }
+                                }
+                            }}
                         >
                             {
                                 (filterFeatures && filterFeatures.length > 0) ?
@@ -208,6 +229,7 @@ const AddActionDialog = (props) => {
                                                 <MenuItem
                                                     key={index}
                                                     value={item}
+                                                    style={{ display: "flex", alignItems: "center" }}
                                                 >
                                                     {item}
                                                 </MenuItem>
@@ -220,7 +242,7 @@ const AddActionDialog = (props) => {
                     </FormControl>
 
                     {/* Action Dropdown */}
-                    <Typography variant="subtitle1" sx={{ mt: 3 }}>
+                    <Typography variant="subtitle1" sx={{ mt: 2, color: "#555" }}>
                         Select Action
                     </Typography>
 
@@ -236,12 +258,19 @@ const AddActionDialog = (props) => {
                             label="Action"
                             onChange={(e) => setAction(e.target.value)}
                             disabled={!feature}
+                            // MenuProps={{
+                            //     PaperProps: {
+                            //         style: {
+                            //             maxHeight: 200, // Note: To controlling the height of Mui drop down...!
+                            //         },
+                            //     },
+                            // }}
+
+                            style={{ backgroundColor: "white", borderRadius: 5 }}
                             MenuProps={{
                                 PaperProps: {
-                                    style: {
-                                        maxHeight: 200, // Note: To controlling the height of Mui drop down...!
-                                    },
-                                },
+                                    style: { maxHeight: 300, borderRadius: 10 }
+                                }
                             }}
                         >
                             {
@@ -250,6 +279,7 @@ const AddActionDialog = (props) => {
                                         <MenuItem
                                             key={index}
                                             value={renderActionName(item)}
+                                            style={{ display: "flex", alignItems: "center" }}
                                         >
                                             {renderActionName(item)}
                                         </MenuItem>
@@ -266,7 +296,14 @@ const AddActionDialog = (props) => {
                         (module != "" && feature != "" && action != "") ?
                             (
                                 <Tooltip title="Success" arrow>
-                                    <IconButton onClick={handleSave}>
+                                    <IconButton
+                                        onClick={handleSave}
+                                        style={{
+                                            backgroundColor: customStyles.colors.primary,
+                                            color: "white",
+                                            boxShadow: "0px 4px 10px rgba(0,0,0,0.2)"
+                                        }}
+                                    >
                                         <CheckCircleIcon fontSize="medium" sx={{ color: customStyles.colors.black }} />
                                     </IconButton>
                                 </Tooltip>

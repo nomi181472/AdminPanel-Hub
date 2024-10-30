@@ -61,7 +61,7 @@ const UpdateUserDialog = (props) => {
         <BootstrapDialog
             aria-labelledby="simple-dialog-title"
             open={open}
-            disableEscapeKeyDown={true}
+            // disableEscapeKeyDown={true}
             onClose={() => {
                 close();
                 clearStates();
@@ -104,16 +104,6 @@ const UpdateUserDialog = (props) => {
 
                     {/* Icon Button Section */}
                     <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                        <IconButton
-                            sx={{ color: customStyles.colors.black }}
-                            onClick={() => {
-                                close();
-                                clearStates();
-                            }}
-                        >
-                            <CloseIcon />
-                        </IconButton>
-
                         <IconButton
                             sx={{ color: customStyles.colors.black }}
                             onClick={updateUserHandler}

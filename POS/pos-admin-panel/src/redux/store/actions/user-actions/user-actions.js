@@ -5,6 +5,7 @@ import apiCallMethods from "@/api/api-methods/api-methods";
 import {
     FETCH_ALL_USERS,
     GET_TOTAL_USERS_COUNT,
+    GET_NEW_USERS_COUNT_BY_MONTH,
     CLEAR_ALL_USER_STATES,
 } from "../../reducers/user-reducer/user-reducer";
 
@@ -140,11 +141,39 @@ const updateUser = (userData, resHandler) => {
     };
 };
 
+// Note: Action function to get new users count by month...!
+const getNewUsersByMonth = (currentMonth) => {
+    return async (dispatch) => {
+        console.log('Current month: ', currentMonth);
+
+        try {
+            const response = await instance({
+                method: apiCallMethods.get,
+                url: `${process.env.NEXT_PUBLIC_GET_NEW_USERS_BY_MONTH}${currentMonth}`
+            });
+            console.log('Res: ', response);
+
+            const { status, data } = response;
+            if (status == 201) {
+                dispatch({
+                    type : GET_NEW_USERS_COUNT_BY_MONTH,
+                    payload : data?.data
+                });
+            }
+        }
+
+        catch (error) {
+            console.log("Something went wrong while integrating get new users count by month api: ", error);
+        };
+    };
+};
+
 export {
     fetchAllUsers,
     getTotalUsersCount,
     clearAllUserStates,
     createUser,
     deleteUser,
-    updateUser
+    updateUser,
+    getNewUsersByMonth
 };

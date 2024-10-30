@@ -3,8 +3,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+    usersList: [],
     totalUserCount: null,
-    usersList: []
+    newUsersCountByMonth: 0,
 };
 
 const userSlice = createSlice({
@@ -23,9 +24,15 @@ const userSlice = createSlice({
             state.totalUserCount = payload;
         },
 
+        GET_NEW_USERS_COUNT_BY_MONTH: (state, action) => {
+            let { payload } = action;
+            state.newUsersCountByMonth = payload;
+        },
+
         CLEAR_ALL_USER_STATES: (state, action) => {
-            state.totalUserCount = null;
             state.usersList = [];
+            state.totalUserCount = null;
+            state.newUsersCountByMonth = 0;
         },
     }
 });
@@ -35,6 +42,7 @@ export const
     {
         FETCH_ALL_USERS,
         GET_TOTAL_USERS_COUNT,
+        GET_NEW_USERS_COUNT_BY_MONTH,
         CLEAR_ALL_USER_STATES,
     } = userSlice.actions;
 export default userSlice.reducer;
