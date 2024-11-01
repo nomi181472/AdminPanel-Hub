@@ -144,14 +144,14 @@ const updateUser = (userData, resHandler) => {
 // Note: Action function to get new users count by month...!
 const getNewUsersByMonth = (currentMonth) => {
     return async (dispatch) => {
-        console.log('Current month: ', currentMonth);
+        // console.log('Current month: ', currentMonth);
 
         try {
             const response = await instance({
                 method: apiCallMethods.get,
                 url: `${process.env.NEXT_PUBLIC_GET_NEW_USERS_BY_MONTH}${currentMonth}`
             });
-            console.log('Res: ', response);
+            // console.log('Res: ', response);
 
             const { status, data } = response;
             if (status == 201) {

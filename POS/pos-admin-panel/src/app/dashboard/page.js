@@ -9,6 +9,7 @@ import UsersIcon from '@mui/icons-material/People';
 import OrdersIcon from '@mui/icons-material/FactCheck';
 import BugReportIcon from '@mui/icons-material/BugReport';
 import { customStyles } from '@/styles/styles';
+import CountUp from 'react-countup';
 
 // Register all necessary components for Chart.js
 Chart.register(...registerables);
@@ -29,10 +30,10 @@ const Dashboard = () => {
             >
                 {
                     [
-                        { title: 'Monthly sale for September', value: '714k', icon: <MonthlySaleIcon /> },
-                        { title: 'New Users', value: '1.35k', icon: <UsersIcon /> },
-                        { title: 'New Item Orders', value: '514k', icon: <OrdersIcon /> },
-                        { title: 'Reported Bug Issues', value: '234', icon: <BugReportIcon /> },
+                        { title: 'Monthly sale for September', value: '1000', icon: <MonthlySaleIcon sx={{ color: "white" }} /> },
+                        { title: 'New Users', value: '400', icon: <UsersIcon sx={{ color: "white" }} /> },
+                        { title: 'New Item Orders', value: '3500', icon: <OrdersIcon sx={{ color: "white" }} /> },
+                        { title: 'Reported Bug Issues', value: '235', icon: <BugReportIcon sx={{ color: "white" }} /> },
                     ]
                         .map((stat, index) => (
                             <Paper
@@ -46,6 +47,15 @@ const Dashboard = () => {
                                     flexDirection: 'column',
                                     alignItems: 'center',
                                     textAlign: 'center',
+                                    '& .icon': { // Apply the transition to the icon itself
+                                        transition: 'transform 0.3s ease', // Smooth transition for both scale up and down
+                                    },
+                                    '&:hover .icon': {
+                                        transform: 'scale(1.2)', // Scale up the icon on hover
+                                    },
+                                    // backgroundColor: 'black'
+                                    background: 'radial-gradient(circle at 10% 20%, rgb(69, 86, 102) 0%, rgb(34, 34, 34) 90%)', // Set the gradient background
+                                    color: 'white',
                                 }}
                             >
                                 <Box
@@ -54,14 +64,20 @@ const Dashboard = () => {
                                     gap={1}
                                     mb={1}
                                 >
-                                    {stat.icon}
+                                    {/* {stat.icon} */}
+                                    <Box className="icon"> {/* Wrap the icon with a class "icon" */}
+                                        {stat.icon}
+                                    </Box>
 
-                                    <Typography variant="h5" fontSize={{ xs: '1.25rem', md: '1.5rem' }}>
-                                        {stat.value}
+                                    <Typography variant="h5" fontSize={{ xs: '1.25rem', md: '1.5rem' }} sx={{ color: "white" }}>
+                                        <CountUp
+                                            end={stat?.value}
+                                            duration={3}
+                                        />
                                     </Typography>
                                 </Box>
 
-                                <Typography variant="subtitle2" fontSize={{ xs: '0.875rem', md: '1rem' }}>
+                                <Typography variant="subtitle2" fontSize={{ xs: '0.875rem', md: '1rem' }} sx={{ color: "white" }}>
                                     {stat.title}
                                 </Typography>
                             </Paper>
@@ -85,6 +101,7 @@ const Dashboard = () => {
                         width: '100%',
                         maxWidth: { lg: '50%' },
                         mb: { xs: 2, lg: 0 },
+                        backgroundColor: "#F2F2F2"
                     }}
                 >
                     <Typography variant="h6" mb={2} fontSize={{ xs: '1rem', md: '1.25rem' }}>
@@ -109,7 +126,12 @@ const Dashboard = () => {
                                     {
                                         label: 'Sales',
                                         data: [20, 30, 40, 25, 35],
-                                        backgroundColor: '#333',
+                                        backgroundColor: function (context) {
+                                            const gradient = context.chart.ctx.createRadialGradient(10, 20, 0, 10, 20, context.chart.width / 2);
+                                            gradient.addColorStop(0, "#7998b3");
+                                            gradient.addColorStop(1, 'rgb(34, 34, 34)');
+                                            return gradient;
+                                        },
                                     },
                                 ],
                             }}
@@ -134,6 +156,7 @@ const Dashboard = () => {
                         maxWidth: { lg: '48%' },
                         mb: { xs: 2, lg: 0 },
                         overflow: 'hidden',
+                        backgroundColor: "#F2F2F2"
                     }}
                 >
                     <Typography variant="h6" mb={2} fontSize={{ xs: '1rem', md: '1.25rem' }}>
@@ -157,7 +180,7 @@ const Dashboard = () => {
                                 datasets: [
                                     {
                                         data: [35, 45, 20],
-                                        backgroundColor: ['#ff6384', '#36a2eb', '#ffcd56'],
+                                        backgroundColor: ['#4c6072', '#2a2d32', '#7998b3'],
                                     },
                                 ],
                             }}
