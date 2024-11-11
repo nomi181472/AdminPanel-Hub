@@ -6,7 +6,7 @@ import MuiDrawer from "@mui/material/Drawer";
 import { TableCell, tableCellClasses, TableRow } from '@mui/material';
 import { customStyles } from '@/styles/styles';
 
-const drawerWidth = 250;
+const drawerWidth = 220;
 
 // Note: AppBar section...!
 const AppBar = styled(

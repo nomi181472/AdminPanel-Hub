@@ -24,7 +24,7 @@ import Searchbar from '@/components/searchbar/searchbar';
 import AddUserDialog from '@/components/add-user-dialog/add-user-dialog';
 import UpdateUserDialog from "@/components/update-user-dialog/update-user-dialog";
 import ShowMessage from '@/components/toast-message/toast-message';
-import ScreenLoader from '@/components/screen-loader/screen-loader';
+import Loader from '@/components/loader/loader';
 import messages from '@/utils/messages/messages';
 import { getAllRoles } from '@/redux/store/actions/roles-actions/roles-actions';
 import {
@@ -96,6 +96,8 @@ const Users = () => {
     // Note: Fetching data from redux...!
     const { authenticatedUser } = useSelector(({ authStates }) => { return authStates });
     const { usersList } = useSelector(({ userStates }) => { return userStates });
+    const { errorMessage } = useSelector(({ errorStates }) => { return errorStates });
+    console.log("Error states: ", errorMessage);
     // console.log("User: ", authenticatedUser);
     // console.log("Users: ", usersList);
 
@@ -308,7 +310,7 @@ const Users = () => {
                         </Paper>
                     )
                     :
-                    (<ScreenLoader />)
+                    (<Loader />)
             }
         </Box>
     );

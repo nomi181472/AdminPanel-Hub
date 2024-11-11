@@ -1,3 +1,5 @@
+// Note: Dashboard page/screen...!
+
 "use client";
 
 import React from 'react';
@@ -11,6 +13,8 @@ import BugReportIcon from '@mui/icons-material/BugReport';
 import { customStyles } from '@/styles/styles';
 import CountUp from 'react-countup';
 
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
 // Register all necessary components for Chart.js
 Chart.register(...registerables);
 
@@ -19,8 +23,13 @@ const Dashboard = () => {
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     return (
-        <Box display="flex" flexDirection="column" gap={3} p={3}>
-            {/* Top Statistics Cards */}
+        <Box
+            display="flex"
+            flexDirection="column"
+            gap={3}
+            p={3}
+        >
+            {/* Note: Top Statistics Cards */}
             <Box
                 display="flex"
                 flexDirection={{ xs: 'column', md: 'row' }}
@@ -30,7 +39,7 @@ const Dashboard = () => {
             >
                 {
                     [
-                        { title: 'Monthly sale for September', value: '1000', icon: <MonthlySaleIcon sx={{ color: "white" }} /> },
+                        { title: `Monthly sale for ${months[new Date().getMonth()]?.substring(0, 3)}`, value: '1000', icon: <MonthlySaleIcon sx={{ color: "white" }} /> },
                         { title: 'New Users', value: '400', icon: <UsersIcon sx={{ color: "white" }} /> },
                         { title: 'New Item Orders', value: '3500', icon: <OrdersIcon sx={{ color: "white" }} /> },
                         { title: 'Reported Bug Issues', value: '235', icon: <BugReportIcon sx={{ color: "white" }} /> },
@@ -42,20 +51,19 @@ const Dashboard = () => {
                                 sx={{
                                     p: 3,
                                     flex: '1 1 auto',
-                                    minWidth: { xs: '100%', sm: '45%', md: '22%' },
+                                    minWidth: { xs: '100%', sm: 'auto', md: 'auto' },
                                     display: 'flex',
                                     flexDirection: 'column',
                                     alignItems: 'center',
                                     textAlign: 'center',
-                                    '& .icon': { // Apply the transition to the icon itself
-                                        transition: 'transform 0.3s ease', // Smooth transition for both scale up and down
+                                    '& .icon': {
+                                        transition: 'transform 0.3s ease',
                                     },
                                     '&:hover .icon': {
-                                        transform: 'scale(1.2)', // Scale up the icon on hover
+                                        transform: 'scale(1.2)',
                                     },
-                                    // backgroundColor: 'black'
-                                    background: 'radial-gradient(circle at 10% 20%, rgb(69, 86, 102) 0%, rgb(34, 34, 34) 90%)', // Set the gradient background
-                                    color: 'white',
+                                    background: 'radial-gradient(circle at 10% 20%, rgb(69, 86, 102) 0%, rgb(34, 34, 34) 90%)',
+                                    color: customStyles.colors.white
                                 }}
                             >
                                 <Box
@@ -65,7 +73,7 @@ const Dashboard = () => {
                                     mb={1}
                                 >
                                     {/* {stat.icon} */}
-                                    <Box className="icon"> {/* Wrap the icon with a class "icon" */}
+                                    <Box className="icon">
                                         {stat.icon}
                                     </Box>
 
@@ -104,7 +112,14 @@ const Dashboard = () => {
                         backgroundColor: "#F2F2F2"
                     }}
                 >
-                    <Typography variant="h6" mb={2} fontSize={{ xs: '1rem', md: '1.25rem' }}>
+                    <Typography
+                        variant="h6"
+                        mb={2}
+                        fontSize={{
+                            xs: '1rem',
+                            md: '1.25rem'
+                        }}
+                    >
                         Total Sales
                     </Typography>
 
@@ -113,7 +128,7 @@ const Dashboard = () => {
                             position: customStyles.position.relative,
                             height: '90%',
                             width: '100%',
-                            maxHeight: { xs: '200px', md: '350px' }, // Control chart height
+                            maxHeight: { xs: '200px', md: '350px' },
                             display: 'flex',
                             alignItems: customStyles.alignment.center,
                             justifyContent: customStyles.alignment.center
@@ -165,10 +180,10 @@ const Dashboard = () => {
 
                     <Box
                         sx={{
-                            position: 'relative',
+                            position: customStyles.position.relative,
                             height: '80%',
                             width: '100%',
-                            maxHeight: { xs: '200px', md: '350px' }, // Control chart height
+                            maxHeight: { xs: '200px', md: '350px' },
                             display: 'flex',
                             alignItems: customStyles.alignment.center,
                             justifyContent: customStyles.alignment.center

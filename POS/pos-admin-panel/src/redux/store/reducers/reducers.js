@@ -9,6 +9,8 @@ import authReducer from './auth-reducer/auth-reducer';
 import userReducer from "./user-reducer/user-reducer";
 import rolesReducer from "./roles-reducer/roles-reducer";
 import actionReducer from './actions-reducer/actions-reducer';
+import notificationReducer from "./notification-reducer/notification-reducer";
+import errorReducer from "./error-reducer/error-reducer";
 
 // Note: Persist reducer configuration...!
 const persistConfig = {
@@ -21,8 +23,10 @@ const persistConfig = {
 const rootReducer = combineReducers({
     authStates: authReducer,
     userStates: userReducer,
-    roleStates : rolesReducer,
-    actionsStates : actionReducer
+    roleStates: rolesReducer,
+    actionsStates: actionReducer,
+    notificationStates: notificationReducer,
+    errorStates: errorReducer
 });
 
 export default persistReducer(persistConfig, rootReducer);

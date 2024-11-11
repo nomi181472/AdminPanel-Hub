@@ -6,6 +6,7 @@ const initialState = {
     usersList: [],
     totalUserCount: null,
     newUsersCountByMonth: 0,
+    unAuthorizeUser: null
 };
 
 const userSlice = createSlice({

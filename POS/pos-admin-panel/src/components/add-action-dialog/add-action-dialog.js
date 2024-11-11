@@ -50,6 +50,11 @@ const AddActionDialog = (props) => {
         setAllActions([]);
     };
 
+    // Note: Function to break string...!
+    const breakString = (str) => {
+        return str.replace(/([A-Z])/g, ' $1').trim();
+    };
+
     // Note: On change handler for module...!
     const onChangeForModule = (e) => {
         const val = e.target.value;
@@ -231,7 +236,7 @@ const AddActionDialog = (props) => {
                                                     value={item}
                                                     style={{ display: "flex", alignItems: "center" }}
                                                 >
-                                                    {item}
+                                                    {breakString(item?.slice(1))}
                                                 </MenuItem>
                                             );
                                         })
@@ -258,14 +263,6 @@ const AddActionDialog = (props) => {
                             label="Action"
                             onChange={(e) => setAction(e.target.value)}
                             disabled={!feature}
-                            // MenuProps={{
-                            //     PaperProps: {
-                            //         style: {
-                            //             maxHeight: 200, // Note: To controlling the height of Mui drop down...!
-                            //         },
-                            //     },
-                            // }}
-
                             style={{ backgroundColor: "white", borderRadius: 5 }}
                             MenuProps={{
                                 PaperProps: {
@@ -281,7 +278,7 @@ const AddActionDialog = (props) => {
                                             value={renderActionName(item)}
                                             style={{ display: "flex", alignItems: "center" }}
                                         >
-                                            {renderActionName(item)}
+                                            { breakString(renderActionName(item)) }
                                         </MenuItem>
                                     );
                                 })

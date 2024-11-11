@@ -5,12 +5,11 @@ import { useSelector } from 'react-redux';
 import {
     Box,
     Typography,
-    Chip,
     Tooltip,
     IconButton
 } from '@mui/material';
-
 import { Add } from '@mui/icons-material';
+import CountUp from 'react-countup';
 import { customStyles } from '@/styles/styles';
 
 // Note: Roles stats card component...!
@@ -33,7 +32,10 @@ const IAMStatsCard = () => {
         >
             <Box>
                 <Typography variant="h5" fontWeight="bold">
-                    500
+                    <CountUp
+                        end={500}
+                        duration={3}
+                    />
                 </Typography>
 
                 <Typography variant="body2" color="text.secondary">
@@ -43,7 +45,10 @@ const IAMStatsCard = () => {
 
             <Box>
                 <Typography variant="h5" fontWeight="bold">
-                    02
+                    <CountUp
+                        end={2}
+                        duration={3}
+                    />
                 </Typography>
 
                 <Typography variant="body2" color="text.secondary">
@@ -53,18 +58,11 @@ const IAMStatsCard = () => {
 
             <Box display="flex" alignItems="center">
                 <Typography variant="h5" fontWeight="bold">
-                    05
+                    <CountUp
+                        end={5}
+                        duration={3}
+                    />
                 </Typography>
-
-                <Chip
-                    label="2% up"
-                    size="small"
-                    sx={{
-                        ml: 1,
-                        bgcolor: '#E0E0E0',
-                        color: 'black',
-                    }}
-                />
 
                 <Typography variant="body2" color="text.secondary" sx={{ ml: 1 }}>
                     Total inventories added by today
@@ -92,7 +90,7 @@ const UserStatsCard = (props) => {
     // Note: Fetching data from redux...!
     const { totalUserCount, usersList, newUsersCountByMonth } = useSelector(({ userStates }) => { return userStates });
     // console.log("Total users: ", totalUserCount);
-    console.log("New Users Count By Month: ", newUsersCountByMonth);
+    // console.log("New Users Count By Month: ", newUsersCountByMonth);
 
     return (
         <Box
@@ -112,7 +110,10 @@ const UserStatsCard = (props) => {
         >
             <Box>
                 <Typography variant="h5" fontWeight="bold">
-                    {totalUserCount ? totalUserCount : 0}
+                    <CountUp
+                        end={totalUserCount ? totalUserCount : 0}
+                        duration={3}
+                    />
                 </Typography>
 
                 <Typography variant="body2" color="text.secondary">
@@ -122,7 +123,10 @@ const UserStatsCard = (props) => {
 
             <Box>
                 <Typography variant="h5" fontWeight="bold">
-                    {[...usersList].filter((item) => { return item?.isActive })?.length}
+                    <CountUp
+                        end={[...usersList].filter((item) => { return item?.isActive })?.length}
+                        duration={3}
+                    />
                 </Typography>
 
                 <Typography variant="body2" color="text.secondary">
@@ -132,7 +136,10 @@ const UserStatsCard = (props) => {
 
             <Box display="flex" alignItems="center">
                 <Typography variant="h5" fontWeight="bold">
-                    {newUsersCountByMonth}
+                    <CountUp
+                        end={newUsersCountByMonth}
+                        duration={3}
+                    />
                 </Typography>
 
                 <Typography variant="body2" color="text.secondary" sx={{ ml: 1 }}>
@@ -181,7 +188,10 @@ const RolesStatsCard = (props) => {
         >
             <Box>
                 <Typography variant="h5" fontWeight="bold">
-                    {roles?.length}
+                    <CountUp
+                        end={roles?.length}
+                        duration={3}
+                    />
                 </Typography>
 
                 <Typography variant="body2" color="text.secondary">
@@ -191,7 +201,10 @@ const RolesStatsCard = (props) => {
 
             <Box>
                 <Typography variant="h5" fontWeight="bold">
-                    {[...roles].filter((item) => { return item?.isActive })?.length}
+                    <CountUp
+                        end={[...roles].filter((item) => { return item?.isActive })?.length}
+                        duration={3}
+                    />
                 </Typography>
 
                 <Typography variant="body2" color="text.secondary">
@@ -201,18 +214,11 @@ const RolesStatsCard = (props) => {
 
             <Box display="flex" alignItems="center">
                 <Typography variant="h5" fontWeight="bold">
-                    10
+                    <CountUp
+                        end={10}
+                        duration={3}
+                    />
                 </Typography>
-
-                <Chip
-                    label="5% up"
-                    size="small"
-                    sx={{
-                        ml: 1,
-                        bgcolor: '#E0E0E0',
-                        color: 'black',
-                    }}
-                />
 
                 <Typography variant="body2" color="text.secondary" sx={{ ml: 1 }}>
                     New Roles
@@ -238,13 +244,18 @@ const RenderStats = (props) => {
     // console.log('Props of render stats component: ', props);
     const { statsOf, handler } = props;
 
+    const { errorMessage } = useSelector(({ errorStates }) => { return errorStates });
+    console.log("Error states: ", errorMessage);
+
     const renderStatsHandler = () => {
         if (statsOf == "iam") return <IAMStatsCard />
         else if (statsOf == "users") return <UserStatsCard funcHandler={handler} />
         else if (statsOf == "roles") return <RolesStatsCard funcHandler={handler} />
     };
 
-    return (<> {renderStatsHandler()} </>);
+    return (
+        <> {!errorMessage && renderStatsHandler()} </>
+    );
 };
 
 export default memo(RenderStats);

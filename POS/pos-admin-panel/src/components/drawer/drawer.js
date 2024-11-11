@@ -25,6 +25,8 @@ import { logOutUser } from '@/redux/store/actions/auth-actions/auth-actions';
 import { clearAllUserStates } from '@/redux/store/actions/user-actions/user-actions';
 import { clearAllRolesStates } from '@/redux/store/actions/roles-actions/roles-actions';
 import { clearAllActionStates } from '@/redux/store/actions/action-feature-actions/action-feature-actions';
+import { clearAllNotificationStates } from '@/redux/store/actions/notification-actions/notification-actions';
+import { store } from "@/redux/store/store";
 
 const AppDrawer = (props) => {
     const { openDrawer, closeDrawer } = props;
@@ -58,10 +60,14 @@ const AppDrawer = (props) => {
         });
 
         setTimeout(() => {
+            store?.dispatch({
+                type: CLEAR_ERROR_MESSAGE
+            });
             dispatch(logOutUser());
             dispatch(clearAllUserStates());
             dispatch(clearAllRolesStates());
             dispatch(clearAllActionStates());
+            dispatch(clearAllNotificationStates());
         }, 3000);
     };
 

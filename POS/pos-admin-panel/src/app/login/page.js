@@ -20,6 +20,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import Lottie from 'lottie-react';
+import { Spinner } from 'react-activity';
 
 import styles from "./login.module.css";
 import AuthBGLottie from "../../../public/lottie/auth-bg-animation.json";
@@ -27,6 +28,7 @@ import messages from '@/utils/messages/messages';
 import ShowMessage from '@/components/toast-message/toast-message';
 import Loader from '@/components/loader/loader';
 import { logInUser } from '@/redux/store/actions/auth-actions/auth-actions';
+import { customStyles } from '@/styles/styles';
 
 const LogIn = () => {
 
@@ -223,16 +225,19 @@ const LogIn = () => {
                         <Button
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 3, mb: 2, backgroundColor: 'black' }}
+                            sx={{ mt: 3, mb: 2, backgroundColor: 'black', py: 1.5 }}
                             onClick={logInHandler}
                             disabled={formStates.loader}
                         >
-                            {formStates.loader ? <Loader /> : "Sign In"}
+                            {formStates.loader ? <Spinner color={customStyles.colors.white} size={15} /> : "Sign In"}
                         </Button>
 
                         <Grid container justifyContent="flex-end">
                             <Grid item xs="auto">
-                                <Link href="/forget-password" passHref>
+                                <Link
+                                    href="/forget-password"
+                                    passHref
+                                >
                                     <Typography variant="body2">
                                         Forgot password?
                                     </Typography>

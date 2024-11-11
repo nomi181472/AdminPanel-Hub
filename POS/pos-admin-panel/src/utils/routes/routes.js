@@ -4,8 +4,6 @@ import { Home } from '@mui/icons-material';
 import InventoryAccessManagementIcon from '@mui/icons-material/AdminPanelSettings';
 import UsersIcon from '@mui/icons-material/People';
 import RolesIcon from '@mui/icons-material/Api';
-import ResourcesIcon from '@mui/icons-material/Layers';
-import PermissionsIcon from '@mui/icons-material/Badge';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import ActionsIcon from '@mui/icons-material/Attractions';
 
@@ -75,21 +73,7 @@ const navbarRoutes = [
         label: 'actions',
         path: authenticatedRoutes[6],
         icon: ActionsIcon
-    },
-
-    {
-        id: 4,
-        label: 'resources',
-        path: "/",
-        icon: ResourcesIcon
-    },
-
-    {
-        id: 5,
-        label: 'permissions',
-        path: "/",
-        icon: PermissionsIcon
-    },
+    }
 ];
 
 export {

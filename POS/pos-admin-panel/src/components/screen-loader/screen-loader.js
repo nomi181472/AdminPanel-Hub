@@ -2,36 +2,34 @@
 
 import React, { memo } from 'react';
 import { Box, Typography } from '@mui/material';
-import { Spinner } from 'react-activity';
+import { Levels } from 'react-activity';
+import { customStyles } from '@/styles/styles';
 
-const ScreenLoader = () => {
-    return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                height: '100vh',
-                // backgroundColor: 'rgba(255, 255, 255, 0.8)', // Optional: translucent background
-                position: 'fixed',
-                top: 80,
-                left: 40,
-                right: 0,
-                bottom: 0,
-                // zIndex: 1300, // Ensure it's above other content
-            }}
-        >
+const ScreenLoader = () => (
+  <Box
+    sx={{
+      display: 'flex',
+      flexDirection: customStyles.direction.column,
+      alignItems: customStyles.alignment.center,
+      justifyContent: customStyles.alignment.center,
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: customStyles.sizeInPercent.size_100,
+      height: '100%',
+      backgroundColor: customStyles.colors.whiteSmoke,
+      zIndex: 9999,
+    }}
+  >
+    <Levels
+      color={customStyles.colors.black}
+      size={30}
+    />
 
-            {/* Note: Loader */}
-            <Spinner color="black" size={32} />
-
-            {/* Note: Loader text */}
-            <Typography variant="h6" sx={{ mt: 2 }}>
-                Loading...
-            </Typography>
-        </Box>
-    );
-};
+    <Typography variant="h6" sx={{ mt: 2 }}>
+      Loading...
+    </Typography>
+  </Box>
+);
 
 export default memo(ScreenLoader);

@@ -1,6 +1,8 @@
 /***** Note: Axios Configuration File *****/
 
 import axios from "axios";
+import { store } from "@/redux/store/store";
+import { SET_ERROR } from "@/redux/store/reducers/error-reducer/error-reducer";
 
 const urls = {
     _7080_Port_Url: process.env.NEXT_PUBLIC_API_URL
@@ -40,13 +42,21 @@ instance.interceptors.response.use(
 
     (error) => {
         // Check for network error (e.g., no response received)
+
+        if (error.response && error.response.status === 403) {
+            // Note: Set error message in redux error state (Globally).
+            store.dispatch({
+                type: SET_ERROR,
+                payload: "Access forbidden. You don't have permission to access this resource.",
+            });
+        }
+
+        // Note: Handle network error...!
         if (!error.response) {
-            const netDisconnectedOrServerLoss = error;
-            console.log("Internet disconnected or server loss: " , netDisconnectedOrServerLoss);
-            alert("Network error: Please check your internet connection.");
+            console.log("Internet disconnected or server loss:", error);
         };
 
-        // Return the error to be handled where it's needed (or globally)
+        // Note: Return the error to be handled where it's needed (or globally)...!
         return Promise.reject(error);
     }
 );

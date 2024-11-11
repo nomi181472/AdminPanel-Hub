@@ -13,6 +13,7 @@ import Box from '@mui/material/Box';
 import { DrawerHeader, Main } from '@/components/mui-sections/mui-sections';
 import AppDrawer from '@/components/drawer/drawer';
 import AppNavBar from "@/components/appbar/appbar";
+import { customStyles } from "../styles/styles";
 
 const AppLayOut = (props) => {
   // console.log("Props: ", props);
@@ -54,11 +55,11 @@ const AppLayOut = (props) => {
         open={openDrawer}
         sx={{
           flexGrow: 1,
-          marginLeft: openDrawer ? '0px' : '0px',
+          marginLeft: openDrawer ? 0 : 0,
           transition: 'margin 0.3s ease',
           padding: { xs: '16px', sm: '24px', md: '32px' },
           display: 'flex',
-          justifyContent: 'center',
+          justifyContent: customStyles.alignment.center,
           marginTop: '2%',
         }}
       >
