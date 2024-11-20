@@ -8,6 +8,7 @@ import {
     GET_NEW_USERS_COUNT_BY_MONTH,
     CLEAR_ALL_USER_STATES,
 } from "../../reducers/user-reducer/user-reducer";
+import { CLEAR_ERROR_MESSAGE } from "../../reducers/error-reducer/error-reducer";
 
 // Note: Action function to get toTal users count...!
 const getTotalUsersCount = () => {
@@ -21,6 +22,13 @@ const getTotalUsersCount = () => {
 
             const { status, data } = response;
             if (status == 200) {
+
+                // Note: Clearing error message state...!
+                dispatch({
+                    type: CLEAR_ERROR_MESSAGE
+                });
+
+                // Note: Set required data in redux...!
                 dispatch({
                     type: GET_TOTAL_USERS_COUNT,
                     payload: data?.data
@@ -46,6 +54,13 @@ const fetchAllUsers = () => {
 
             const { status, data } = response;
             if (status == 200) {
+                
+                // Note: Clearing error message state...!
+                dispatch({
+                    type: CLEAR_ERROR_MESSAGE
+                });
+
+                // Note: Set required data in redux...!
                 dispatch({
                     type: FETCH_ALL_USERS,
                     payload: data?.data
@@ -130,7 +145,7 @@ const updateUser = (userData, resHandler) => {
             // console.log('Res: ', response);
 
             const { status, data } = response;
-            if (status == 200) resHandler(response , "User updated successfully");
+            if (status == 200) resHandler(response, "User updated successfully");
         }
 
         catch (error) {
@@ -156,8 +171,8 @@ const getNewUsersByMonth = (currentMonth) => {
             const { status, data } = response;
             if (status == 201) {
                 dispatch({
-                    type : GET_NEW_USERS_COUNT_BY_MONTH,
-                    payload : data?.data
+                    type: GET_NEW_USERS_COUNT_BY_MONTH,
+                    payload: data?.data
                 });
             }
         }

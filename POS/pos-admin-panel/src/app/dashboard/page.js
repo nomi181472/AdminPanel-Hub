@@ -3,6 +3,7 @@
 "use client";
 
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Box, Paper, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Bar, Pie } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
@@ -22,27 +23,50 @@ const Dashboard = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
+    // Note: Fetching data from redux...!
+    const { newUsersCountByMonth } = useSelector(({ userStates }) => { return userStates });
+    // console.log("New Users Count By Month: ", newUsersCountByMonth);
+
     return (
         <Box
             display="flex"
-            flexDirection="column"
+            flexDirection={customStyles.direction.column}
             gap={3}
             p={3}
         >
             {/* Note: Top Statistics Cards */}
             <Box
                 display="flex"
-                flexDirection={{ xs: 'column', md: 'row' }}
+                flexDirection={{
+                    xs: customStyles.direction.column,
+                    md: customStyles.direction.row
+                }}
                 justifyContent="space-between"
                 gap={3}
                 paddingTop={5}
             >
                 {
                     [
-                        { title: `Monthly sale for ${months[new Date().getMonth()]?.substring(0, 3)}`, value: '1000', icon: <MonthlySaleIcon sx={{ color: "white" }} /> },
-                        { title: 'New Users', value: '400', icon: <UsersIcon sx={{ color: "white" }} /> },
-                        { title: 'New Item Orders', value: '3500', icon: <OrdersIcon sx={{ color: "white" }} /> },
-                        { title: 'Reported Bug Issues', value: '235', icon: <BugReportIcon sx={{ color: "white" }} /> },
+                        {
+                            title: `Monthly sale for ${months[new Date().getMonth()]?.substring(0, 3)}`,
+                            value: '1000',
+                            icon: <MonthlySaleIcon sx={{ color: customStyles.colors.white }} />
+                        },
+                        {
+                            title: `New User${newUsersCountByMonth > 0 ? 's' : ''}`,
+                            value: newUsersCountByMonth > 0 ? newUsersCountByMonth : 0,
+                            icon: <UsersIcon sx={{ color: customStyles.colors.white }} />
+                        },
+                        {
+                            title: 'New Item Orders',
+                            value: '3500',
+                            icon: <OrdersIcon sx={{ color: customStyles.colors.white }} />
+                        },
+                        {
+                            title: 'Reported Bug Issues',
+                            value: '235',
+                            icon: <BugReportIcon sx={{ color: customStyles.colors.white }} />
+                        },
                     ]
                         .map((stat, index) => (
                             <Paper
@@ -53,9 +77,9 @@ const Dashboard = () => {
                                     flex: '1 1 auto',
                                     minWidth: { xs: '100%', sm: 'auto', md: 'auto' },
                                     display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    textAlign: 'center',
+                                    flexDirection: customStyles.direction.column,
+                                    alignItems: customStyles.alignment.center,
+                                    textAlign: customStyles.alignment.center,
                                     '& .icon': {
                                         transition: 'transform 0.3s ease',
                                     },

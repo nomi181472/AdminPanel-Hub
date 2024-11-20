@@ -12,7 +12,7 @@ const errorSlice = createSlice({
     reducers: {
         SET_ERROR: (state, action) => {
             const { payload } = action;
-            console.log('Error occurued in api call: ', payload);
+            // console.log('403 Error occurued in api call: ', payload);
             state.errorMessage = payload;
         },
 

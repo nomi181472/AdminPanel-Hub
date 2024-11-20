@@ -36,6 +36,7 @@ import {
   getMatrixDataByFeatureName,
 } from "@/redux/store/actions/roles-actions/roles-actions";
 import { customStyles } from "@/styles/styles";
+import ErrorMessage from "@/components/error-message/error-message";
 
 const Roles = () => {
   // Note: Handeling states here...!
@@ -60,8 +61,10 @@ const Roles = () => {
       return roleStates;
     }
   );
+  const { errorMessage } = useSelector(({ errorStates }) => { return errorStates });
+  // console.log("Error states: ", errorMessage);
   // console.log("Features: ", features);
-  // console.log("Matrix data: ", matrixDataByFeatureName);
+  console.log("Matrix data: ", matrixDataByFeatureName);
 
   // Note: Function to break string...!
   const breakString = (str) => {
@@ -104,7 +107,7 @@ const Roles = () => {
     const dropDownValue = event.target.value;
     setSelectedFeature(dropDownValue);
     setLoadData(true);
-    console.log("Selected feature:", dropDownValue);
+    // console.log("Selected feature:", dropDownValue);
     dropDownValue && dispatch(getMatrixDataByFeatureName(dropDownValue));
   };
 
@@ -192,169 +195,174 @@ const Roles = () => {
       <StatsCard statsOf={"roles"} handler={() => setRoleDialog(true)} />
 
       {/* Note: Table section */}
-      <TableContainer
-        component={Paper}
-        sx={{
-          border: "0.5px solid #ccc",
-          marginTop: 2,
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: customStyles.alignment.spaceBetween,
-            alignItems: customStyles.alignment.center,
-            padding: "16px",
-            backgroundColor: customStyles.colors.white,
-            borderBottom: "1px solid silver",
-          }}
-        >
-          {/* Note: Search bar component */}
-          <Searchbar
-            placeholder="Search Roles"
-            bgColor={customStyles.colors.white}
-            width={300}
-            inputValue={searchRoles}
-            onChangeHandler={(value) => setSearchRoles(value)}
-          />
-          <Select
-            value={breakString(selectedFeature?.slice(1))}
-            onChange={handleChange}
-            displayEmpty
-            renderValue={(selected) => {
-              if (selectedFeature?.length === 0) {
-                return <span> Select Feature </span>;
-              }
+      {
+        (errorMessage) ? (<ErrorMessage />) :
+          (
+            <TableContainer
+              component={Paper}
+              sx={{
+                border: "0.5px solid #ccc",
+                marginTop: 2,
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: customStyles.alignment.spaceBetween,
+                  alignItems: customStyles.alignment.center,
+                  padding: "16px",
+                  backgroundColor: customStyles.colors.white,
+                  borderBottom: "1px solid silver",
+                }}
+              >
+                {/* Note: Search bar component */}
+                <Searchbar
+                  placeholder="Search Roles"
+                  bgColor={customStyles.colors.white}
+                  width={300}
+                  inputValue={searchRoles}
+                  onChangeHandler={(value) => setSearchRoles(value)}
+                />
+                <Select
+                  value={breakString(selectedFeature?.slice(1))}
+                  onChange={handleChange}
+                  displayEmpty
+                  renderValue={(selected) => {
+                    if (selectedFeature?.length === 0) {
+                      return <span> Select Feature </span>;
+                    }
 
-              return breakString(selectedFeature?.slice(1));
-            }}
-            sx={{
-              width: 300,
-              paddingLeft: 1,
-              backgroundColor: "transparent",
-              border: "none",
-              borderBottom: "1px solid black",
-              borderRadius: 0,
-              "&:before": {
-                border: "none",
-              },
-              "&:after": {
-                border: "none",
-              },
-              "&:focus": {
-                border: "none",
-              },
-              "&:hover": {
-                border: "none",
-                borderBottom: "1px solid black",
-              },
-              "& .MuiSelect-select": {
-                padding: "10px 0",
-              },
-              "& .MuiOutlinedInput-notchedOutline": {
-                border: "none",
-              },
-            }}
-          >
-            {features && features.length > 0 ? (
-              features.map((feature) => (
-                <MenuItem key={feature} value={feature}>
-                  {breakString(feature?.slice(1))}
-                </MenuItem>
-              ))
-            ) : (
-              <MenuItem value="" disabled>
-                No Feature
-              </MenuItem>
-            )}
-          </Select>
-        </Box>
-
-        {loadData ? (
-          <Loader />
-        ) : (
-          <>
-            <Table sx={{ minWidth: 700 }} aria-label="customized table">
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell align={"left"}>roles</StyledTableCell>
-
-                  {matrixDataByFeatureName?.actionsInFeature?.map(
-                    (item, index) => (
-                      <StyledTableCell key={item.id} align={"center"}>
-                        {item?.name.slice(item?.name.lastIndexOf("/") + 1)}
-                      </StyledTableCell>
-                    )
+                    return breakString(selectedFeature?.slice(1));
+                  }}
+                  sx={{
+                    width: 300,
+                    paddingLeft: 1,
+                    backgroundColor: "transparent",
+                    border: "none",
+                    borderBottom: "1px solid black",
+                    borderRadius: 0,
+                    "&:before": {
+                      border: "none",
+                    },
+                    "&:after": {
+                      border: "none",
+                    },
+                    "&:focus": {
+                      border: "none",
+                    },
+                    "&:hover": {
+                      border: "none",
+                      borderBottom: "1px solid black",
+                    },
+                    "& .MuiSelect-select": {
+                      padding: "10px 0",
+                    },
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      border: "none",
+                    },
+                  }}
+                >
+                  {features && features.length > 0 ? (
+                    features.map((feature) => (
+                      <MenuItem key={feature} value={feature}>
+                        {breakString(feature?.slice(1))}
+                      </MenuItem>
+                    ))
+                  ) : (
+                    <MenuItem value="" disabled>
+                      No Feature
+                    </MenuItem>
                   )}
-                </TableRow>
-              </TableHead>
+                </Select>
+              </Box>
 
-              <TableBody>
-                {paginatedRolesData?.map((row) => (
-                  <StyledTableRow key={row.id}>
-                    {/* Note: Role Name */}
-                    <StyledTableCell
-                      component="th"
-                      scope="row"
-                      align="left"
-                      sx={{
-                        cursor: "pointer",
-                      }}
-                      onClick={() => {
-                        setActionDialog(true);
-                        setSelectRow(row);
-                      }}
-                    >
-                      {row.name}
-                    </StyledTableCell>
+              {loadData ? (
+                <Loader />
+              ) : (
+                <>
+                  <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                    <TableHead>
+                      <TableRow>
+                        <StyledTableCell align={"left"}>roles</StyledTableCell>
 
-                    {/* Note: Actions Mapping */}
-                    {matrixDataByFeatureName?.actionsInFeature?.map(
-                      (action) => {
-                        // Note: Check if the action is associated with the role
-                        const isActionAssociated =
-                          matrixDataByFeatureName?.actionsAssociatedWithRole.some(
-                            (assoc) =>
-                              assoc.actionId === action.id &&
-                              assoc.roleId === row.id
-                          );
+                        {matrixDataByFeatureName?.actionsInFeature?.map(
+                          (item, index) => (
+                            <StyledTableCell key={item.id} align={"center"}>
+                              {item?.name.slice(item?.name.lastIndexOf("/") + 1)}
+                            </StyledTableCell>
+                          )
+                        )}
+                      </TableRow>
+                    </TableHead>
 
-                        return (
-                          <StyledTableCell key={action.id} align="center">
-                            <Button
-                              variant="contained"
-                              sx={{
-                                backgroundColor: isActionAssociated
-                                  ? "green"
-                                  : "red",
-                              }}
-                            >
-                              {isActionAssociated ? "Yes" : "No"}
-                            </Button>
+                    <TableBody>
+                      {paginatedRolesData?.map((row) => (
+                        <StyledTableRow key={row.id}>
+                          {/* Note: Role Name */}
+                          <StyledTableCell
+                            component="th"
+                            scope="row"
+                            align="left"
+                            sx={{
+                              cursor: "pointer",
+                            }}
+                            onClick={() => {
+                              setActionDialog(true);
+                              setSelectRow(row);
+                            }}
+                          >
+                            {row.name}
                           </StyledTableCell>
-                        );
-                      }
-                    )}
-                  </StyledTableRow>
-                ))}
-              </TableBody>
-            </Table>
 
-            {/* Pagination */}
-            {matrixDataByFeatureName && (
-              <TablePagination
-                component="div"
-                count={filteredRolesData?.length}
-                page={page}
-                onPageChange={handleChangePage}
-                rowsPerPage={rowsPerPage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-                rowsPerPageOptions={[5, 10, 25]}
-              />
-            )}
-          </>
-        )}
-      </TableContainer>
+                          {/* Note: Actions Mapping */}
+                          {matrixDataByFeatureName?.actionsInFeature?.map(
+                            (action) => {
+                              // Note: Check if the action is associated with the role
+                              const isActionAssociated =
+                                matrixDataByFeatureName?.actionsAssociatedWithRole.some(
+                                  (assoc) =>
+                                    assoc.actionId === action.id &&
+                                    assoc.roleId === row.id
+                                );
+
+                              return (
+                                <StyledTableCell key={action.id} align="center">
+                                  <Button
+                                    variant="contained"
+                                    sx={{
+                                      backgroundColor: isActionAssociated
+                                        ? "green"
+                                        : "red",
+                                    }}
+                                  >
+                                    {isActionAssociated ? "Yes" : "No"}
+                                  </Button>
+                                </StyledTableCell>
+                              );
+                            }
+                          )}
+                        </StyledTableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+
+                  {/* Pagination */}
+                  {matrixDataByFeatureName && (
+                    <TablePagination
+                      component="div"
+                      count={filteredRolesData?.length}
+                      page={page}
+                      onPageChange={handleChangePage}
+                      rowsPerPage={rowsPerPage}
+                      onRowsPerPageChange={handleChangeRowsPerPage}
+                      rowsPerPageOptions={[5, 10, 25]}
+                    />
+                  )}
+                </>
+              )}
+            </TableContainer>
+          )
+      }
     </>
   );
 };

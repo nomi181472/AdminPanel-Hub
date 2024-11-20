@@ -26,6 +26,7 @@ import UpdateUserDialog from "@/components/update-user-dialog/update-user-dialog
 import ShowMessage from '@/components/toast-message/toast-message';
 import Loader from '@/components/loader/loader';
 import messages from '@/utils/messages/messages';
+import ErrorMessage from '@/components/error-message/error-message';
 import { getAllRoles } from '@/redux/store/actions/roles-actions/roles-actions';
 import {
     getTotalUsersCount,
@@ -97,7 +98,7 @@ const Users = () => {
     const { authenticatedUser } = useSelector(({ authStates }) => { return authStates });
     const { usersList } = useSelector(({ userStates }) => { return userStates });
     const { errorMessage } = useSelector(({ errorStates }) => { return errorStates });
-    console.log("Error states: ", errorMessage);
+    // console.log("Error states: ", errorMessage);
     // console.log("User: ", authenticatedUser);
     // console.log("Users: ", usersList);
 
@@ -159,7 +160,7 @@ const Users = () => {
         else if (iconData?.id == 2) {
             setSelectedRow(rowData);
             setShowUpdateUserDialog(true);
-        }
+        };
     };
 
     // Note: This hook will run when component mounts...!
@@ -222,95 +223,100 @@ const Users = () => {
 
             {/* Table section */}
             {
-                (usersList && usersList.length) ?
+                (errorMessage) ? (<ErrorMessage />) :
                     (
-                        <Paper>
-                            {/* Note: Search field section */}
-                            <Box display="flex" justifyContent="flex-end" sx={{ padding: 2 }}>
-                                <Searchbar
-                                    placeholder="Search User"
-                                    bgColor={null}
-                                    width={300}
-                                    inputValue={searchText}
-                                    onChangeHandler={(value) => setSearchText(value)}
-                                />
-                            </Box>
+                        (usersList && usersList.length) ?
+                            (
+                                <Paper>
+                                    {/* Note: Search field section */}
+                                    <Box
+                                        display="flex"
+                                        justifyContent="flex-end"
+                                        sx={{ padding: 2 }}
+                                    >
+                                        <Searchbar
+                                            placeholder="Search User"
+                                            bgColor={null}
+                                            width={300}
+                                            inputValue={searchText}
+                                            onChangeHandler={(value) => setSearchText(value)}
+                                        />
+                                    </Box>
 
-                            <TableContainer component={Paper}>
-                                <Table>
-                                    <TableHead>
-                                        <TableRow>
-                                            {
-                                                tableHead?.map((item, index) => {
-                                                    return (
-                                                        <TableCell
-                                                            key={item.id}
-                                                            sx={{ textTransform: customStyles.textTransformation.capitalize }}
-                                                        >
-                                                            {item.label}
-                                                        </TableCell>
-                                                    );
-                                                })
-                                            }
-                                        </TableRow>
-                                    </TableHead>
+                                    <TableContainer component={Paper}>
+                                        <Table>
+                                            <TableHead>
+                                                <TableRow>
+                                                    {
+                                                        tableHead?.map((item, index) => {
+                                                            return (
+                                                                <TableCell
+                                                                    key={item.id}
+                                                                    sx={{ textTransform: customStyles.textTransformation.capitalize }}
+                                                                >
+                                                                    {item.label}
+                                                                </TableCell>
+                                                            );
+                                                        })
+                                                    }
+                                                </TableRow>
+                                            </TableHead>
 
-                                    <TableBody>
-                                        {
-                                            filteredRows
-                                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                                .map((row, index) => (
-                                                    // row?.name == "SuperAdmin" ? null :
-                                                    <TableRow key={row.id}>
-                                                        <TableCell>{index + 1}</TableCell>
-                                                        <TableCell>{row?.userId.slice(0, 5)}</TableCell>
-                                                        <TableCell>{row?.name}</TableCell>
-                                                        <TableCell>{row?.email}</TableCell>
-                                                        <TableCell>{row?.isActive ? 'Active' : 'Not Active'}</TableCell>
-                                                        <TableCell>{new Date(row?.createdDate).toDateString()}</TableCell>
-                                                        <TableCell>
+                                            <TableBody>
+                                                {
+                                                    filteredRows
+                                                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                                        .map((row, index) => (
+                                                            <TableRow key={row.id}>
+                                                                <TableCell>{index + 1}</TableCell>
+                                                                <TableCell>{row?.userId.slice(0, 5)}</TableCell>
+                                                                <TableCell>{row?.name}</TableCell>
+                                                                <TableCell>{row?.email}</TableCell>
+                                                                <TableCell>{row?.isActive ? 'Active' : 'Not Active'}</TableCell>
+                                                                <TableCell>{new Date(row?.createdDate).toDateString()}</TableCell>
+                                                                <TableCell>
+                                                                    {
+                                                                        renderIcons?.map((item, index) => {
+                                                                            return (
+                                                                                <IconButton
+                                                                                    key={item.id}
+                                                                                    onClick={() => iconHandler(item, row)}
+                                                                                >
+                                                                                    <item.iconName
+                                                                                        sx={{
+                                                                                            backgroundColor: item.bgColor,
+                                                                                            padding: item.padding,
+                                                                                            borderRadius: item.borderRadius,
+                                                                                            color: item.color
+                                                                                        }}
+                                                                                    />
+                                                                                </IconButton>
+                                                                            );
+                                                                        })
+                                                                    }
+                                                                </TableCell>
+                                                            </TableRow>
+                                                        ))
+                                                }
+                                            </TableBody>
+                                        </Table>
+                                    </TableContainer>
 
-                                                            {
-                                                                renderIcons?.map((item, index) => {
-                                                                    return (
-                                                                        <IconButton
-                                                                            key={item.id}
-                                                                            onClick={() => iconHandler(item, row)}
-                                                                        >
-                                                                            <item.iconName
-                                                                                sx={{
-                                                                                    backgroundColor: item.bgColor,
-                                                                                    padding: item.padding,
-                                                                                    borderRadius: item.borderRadius,
-                                                                                    color: item.color
-                                                                                }}
-                                                                            />
-                                                                        </IconButton>
-                                                                    );
-                                                                })
-                                                            }
-                                                        </TableCell>
-                                                    </TableRow>
-                                                ))
-                                        }
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
-
-                            {/* Note: Pagination section */}
-                            <TablePagination
-                                component="div"
-                                count={filteredRows.length}
-                                page={page}
-                                onPageChange={handleChangePage}
-                                rowsPerPage={rowsPerPage}
-                                onRowsPerPageChange={handleChangeRowsPerPage}
-                                labelRowsPerPage="Users per page"
-                            />
-                        </Paper>
+                                    {/* Note: Pagination section */}
+                                    <TablePagination
+                                        component="div"
+                                        count={filteredRows.length}
+                                        page={page}
+                                        onPageChange={handleChangePage}
+                                        rowsPerPage={rowsPerPage}
+                                        onRowsPerPageChange={handleChangeRowsPerPage}
+                                        labelRowsPerPage="Users per page"
+                                    />
+                                </Paper>
+                            )
+                            :
+                            (<Loader />)
                     )
-                    :
-                    (<Loader />)
             }
         </Box>
     );

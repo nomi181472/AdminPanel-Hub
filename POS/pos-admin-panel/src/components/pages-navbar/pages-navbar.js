@@ -8,6 +8,7 @@ import SecurityIcon from '@mui/icons-material/Security';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import ActionsIcon from '@mui/icons-material/Attractions';
 import { navbarRoutes } from '@/utils/routes/routes';
+import { customStyles } from '@/styles/styles';
 
 const PagesNavbar = () => {
 
@@ -39,7 +40,6 @@ const PagesNavbar = () => {
             sx={{
                 width: '100%',
                 bgcolor: 'white',
-                padding: '10px 0',
                 borderRadius: 0,
                 marginBottom: 3
             }}
@@ -53,25 +53,107 @@ const PagesNavbar = () => {
                 <Tab
                     icon={<InventoryIcon sx={{ color: selectedTab === 0 ? 'black' : '#a9a9a9' }} />}
                     label={<Typography sx={{ fontSize: 12, paddingLeft: 2, color: selectedTab === 0 ? 'black' : '#a9a9a9' }}> IAM </Typography>}
-                    sx={{ color: selectedTab === 0 ? 'black' : '#a9a9a9', display: "flex", flexDirection: "row" }}
+                    sx={{
+                        color: selectedTab === 0 ? 'black' : '#a9a9a9',
+                        display: "flex",
+                        flexDirection: customStyles.direction.row,
+                        transition: 'transform 0.3s ease, color 0.3s ease',
+                        // borderRadius: '10px',
+                        // padding: '8px 16px',
+                        // margin : "0px 10px",
+                        '&:hover': {
+                            transform: 'scale(1.1)',
+                            color: customStyles.colors.black,
+                            // backgroundColor: '#f0f0f0',
+                            // boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
+                        },
+                        '& .MuiSvgIcon-root': {
+                            transition: 'color 0.3s ease',
+                        },
+                        '&:hover .MuiSvgIcon-root': {
+                            color: customStyles.colors.black
+                        },
+                    }}
                 />
 
                 <Tab
                     icon={<PersonIcon sx={{ color: selectedTab === 1 ? 'black' : '#a9a9a9' }} />}
                     label={<Typography sx={{ fontSize: 12, paddingLeft: 2, color: selectedTab === 1 ? 'black' : '#a9a9a9' }}> Users </Typography>}
-                    sx={{ color: selectedTab === 1 ? 'black' : '#a9a9a9', display: "flex", flexDirection: "row" }}
+                    sx={{
+                        color: selectedTab === 1 ? 'black' : '#a9a9a9',
+                        display: "flex",
+                        flexDirection: customStyles.direction.row,
+
+                        transition: 'transform 0.3s ease, color 0.3s ease',
+                        // borderRadius: '10px',
+                        // padding: '8px 16px',
+                        // margin : "0px 10px",
+                        '&:hover': {
+                            transform: 'scale(1.1)',
+                            color: customStyles.colors.black,
+                            // backgroundColor: '#f0f0f0',
+                            // boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
+                        },
+                        '& .MuiSvgIcon-root': {
+                            transition: 'color 0.3s ease',
+                        },
+                        '&:hover .MuiSvgIcon-root': {
+                            color: customStyles.colors.black
+                        },
+                    }}
                 />
 
                 <Tab
                     icon={<SecurityIcon sx={{ color: selectedTab === 2 ? 'black' : '#a9a9a9' }} />}
                     label={<Typography sx={{ fontSize: 12, paddingLeft: 2, color: selectedTab === 2 ? 'black' : '#a9a9a9' }}> Roles </Typography>}
-                    sx={{ color: selectedTab === 2 ? 'black' : '#a9a9a9', display: "flex", flexDirection: "row" }}
+                    sx={{
+                        color: selectedTab === 2 ? 'black' : '#a9a9a9',
+                        display: "flex",
+                        flexDirection: customStyles.direction.row,
+                        transition: 'transform 0.3s ease, color 0.3s ease',
+                        // borderRadius: '10px',
+                        // padding: '8px 16px',
+                        // margin : "0px 10px",
+                        '&:hover': {
+                            transform: 'scale(1.1)',
+                            color: customStyles.colors.black,
+                            // backgroundColor: '#f0f0f0',
+                            // boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
+                        },
+                        '& .MuiSvgIcon-root': {
+                            transition: 'color 0.3s ease',
+                        },
+                        '&:hover .MuiSvgIcon-root': {
+                            color: customStyles.colors.black
+                        },
+                    }}
                 />
 
                 <Tab
                     icon={<ActionsIcon sx={{ color: selectedTab === 3 ? 'black' : '#a9a9a9' }} />}
                     label={<Typography sx={{ fontSize: 12, paddingLeft: 2, color: selectedTab === 3 ? 'black' : '#a9a9a9' }}> Actions </Typography>}
-                    sx={{ color: selectedTab === 3 ? 'black' : '#a9a9a9', display: "flex", flexDirection: "row" }}
+                    sx={{
+                        color: selectedTab === 3 ? 'black' : '#a9a9a9',
+                        display: "flex",
+                        flexDirection: customStyles.direction.row,
+
+                        transition: 'transform 0.3s ease, color 0.3s ease',
+                        // borderRadius: '10px',
+                        // padding: '8px 16px',
+                        // margin : "0px 10px",
+                        '&:hover': {
+                            transform: 'scale(1.1)',
+                            color: customStyles.colors.black,
+                            // backgroundColor: '#f0f0f0',
+                            // boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
+                        },
+                        '& .MuiSvgIcon-root': {
+                            transition: 'color 0.3s ease',
+                        },
+                        '&:hover .MuiSvgIcon-root': {
+                            color: customStyles.colors.black
+                        },
+                    }}
                 />
             </Tabs>
         </Paper>

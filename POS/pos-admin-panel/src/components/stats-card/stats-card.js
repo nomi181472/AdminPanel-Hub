@@ -245,7 +245,7 @@ const RenderStats = (props) => {
     const { statsOf, handler } = props;
 
     const { errorMessage } = useSelector(({ errorStates }) => { return errorStates });
-    console.log("Error states: ", errorMessage);
+    // console.log("Error states: ", errorMessage);
 
     const renderStatsHandler = () => {
         if (statsOf == "iam") return <IAMStatsCard />

@@ -7,6 +7,7 @@ import {
     GET_ALL_ACTIONS,
     GET_OVER_ALL_ACTIONS
 } from "../../reducers/actions-reducer/actions-reducer";
+import { CLEAR_ERROR_MESSAGE } from "../../reducers/error-reducer/error-reducer";
 
 // Note: Action function to clear all actions reducer states...!
 const clearAllActionStates = () => {
@@ -29,6 +30,13 @@ const getAllActions = () => {
 
             const { status, data } = response;
             if (status == 200) {
+
+                // Note: Clearing error message state...!
+                dispatch({
+                    type: CLEAR_ERROR_MESSAGE
+                });
+
+                // Note: Set required data in redux...!
                 dispatch({
                     type: GET_ALL_ACTIONS,
                     payload: data?.data

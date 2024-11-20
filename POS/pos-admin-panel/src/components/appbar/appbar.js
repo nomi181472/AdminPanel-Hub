@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { memo, useState } from "react";
+import { useSelector } from 'react-redux';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
@@ -23,6 +24,10 @@ const AppNavBar = (props) => {
     // Note: Handeling states here...!
     const [anchorEl, setAnchorEl] = useState(null);
     const unreadNotification = 17;
+
+    // Note: Fetching data from redux...!
+    const { authenticatedUser } = useSelector(({ authStates }) => { return authStates });
+    console.log("User: ", authenticatedUser);
 
     // Note: Open and close menu's handler...!
     const handleMenu = (event) => setAnchorEl(event.currentTarget);
@@ -55,17 +60,18 @@ const AppNavBar = (props) => {
                     POS Admin Panel
                 </Typography>
 
-                {/* Notification icon */}
-                <IconButton
-                    size="large"
-                    aria-label="show 17 new notifications"
-                    color="inherit"
+                {/* Username */}
+                <Typography
+                    variant="body1"
+                    component="div"
+                    sx={{
+                        color: customStyles.colors.white,
+                        marginRight: 2,
+                        display: { xs: 'none', sm: 'block' }, // Hide on small screens
+                    }}
                 >
-                    <Badge badgeContent={unreadNotification} color="error">
-                        {/* <NotificationsIcon /> */}
-                        <NotificationsIcon className={unreadNotification > 0 ? styles.animateNotification : ''} />
-                    </Badge>
-                </IconButton>
+                    {authenticatedUser?.name}
+                </Typography>
 
                 {/* User Icon with Dropdown */}
                 <IconButton
@@ -78,6 +84,17 @@ const AppNavBar = (props) => {
                     color="inherit"
                 >
                     <AccountCircle />
+                </IconButton>
+
+                {/* Notification icon */}
+                <IconButton
+                    size="large"
+                    aria-label="show 17 new notifications"
+                    color="inherit"
+                >
+                    <Badge badgeContent={unreadNotification} color="error">
+                        <NotificationsIcon className={unreadNotification > 0 ? styles.animateNotification : ''} />
+                    </Badge>
                 </IconButton>
 
                 <Menu
@@ -95,8 +112,12 @@ const AppNavBar = (props) => {
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
                 >
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                    <MenuItem onClick={handleClose}>My Account</MenuItem>
+                    <MenuItem onClick={handleClose}>
+                        Profile
+                    </MenuItem>
+                    <MenuItem onClick={handleClose}>
+                        My Account
+                    </MenuItem>
                 </Menu>
             </Toolbar>
         </AppBar>

@@ -19,7 +19,7 @@ const persistConfig = {
     whitelist: ['authStates']
 };
 
-// Note: This is the root reducer...!
+// Note: This is the root / combine reducer...!
 const rootReducer = combineReducers({
     authStates: authReducer,
     userStates: userReducer,

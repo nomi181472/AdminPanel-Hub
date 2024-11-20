@@ -10,6 +10,7 @@ import {
     CLEAR_ALL_ROLES_STATES,
 }
     from "../../reducers/roles-reducer/roles-reducer";
+import { CLEAR_ERROR_MESSAGE } from "../../reducers/error-reducer/error-reducer";
 
 // Note: Action function to fetch all features...!
 const getAllFeatures = () => {
@@ -23,6 +24,13 @@ const getAllFeatures = () => {
 
             const { status, data } = response;
             if (status == 200) {
+
+                // Note: Clearing error message state...!
+                dispatch({
+                    type: CLEAR_ERROR_MESSAGE
+                });
+
+                // Note: Set required data in redux...!
                 dispatch({
                     type: GET_TOTAL_FEATURES,
                     payload: data?.data?.features

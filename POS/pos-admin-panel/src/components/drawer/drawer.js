@@ -20,6 +20,7 @@ import { drawerWidth, DrawerHeader, Drawer } from '../mui-sections/mui-sections'
 import { appRoutes } from '@/utils/routes/routes';
 import ShowMessage from '@/components/toast-message/toast-message';
 import messages from '@/utils/messages/messages';
+import { CLEAR_ERROR_MESSAGE } from '@/redux/store/reducers/error-reducer/error-reducer';
 import { customStyles } from '@/styles/styles';
 import { logOutUser } from '@/redux/store/actions/auth-actions/auth-actions';
 import { clearAllUserStates } from '@/redux/store/actions/user-actions/user-actions';
