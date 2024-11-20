@@ -38,8 +38,8 @@ const PagesNavbar = () => {
         <Paper
             elevation={3}
             sx={{
-                width: '100%',
-                bgcolor: 'white',
+                width: customStyles.sizeInPercent.size_100,
+                bgcolor: customStyles.colors.white,
                 borderRadius: 0,
                 marginBottom: 3
             }}
@@ -58,14 +58,9 @@ const PagesNavbar = () => {
                         display: "flex",
                         flexDirection: customStyles.direction.row,
                         transition: 'transform 0.3s ease, color 0.3s ease',
-                        // borderRadius: '10px',
-                        // padding: '8px 16px',
-                        // margin : "0px 10px",
                         '&:hover': {
                             transform: 'scale(1.1)',
                             color: customStyles.colors.black,
-                            // backgroundColor: '#f0f0f0',
-                            // boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
                         },
                         '& .MuiSvgIcon-root': {
                             transition: 'color 0.3s ease',
@@ -85,14 +80,9 @@ const PagesNavbar = () => {
                         flexDirection: customStyles.direction.row,
 
                         transition: 'transform 0.3s ease, color 0.3s ease',
-                        // borderRadius: '10px',
-                        // padding: '8px 16px',
-                        // margin : "0px 10px",
                         '&:hover': {
                             transform: 'scale(1.1)',
                             color: customStyles.colors.black,
-                            // backgroundColor: '#f0f0f0',
-                            // boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
                         },
                         '& .MuiSvgIcon-root': {
                             transition: 'color 0.3s ease',
@@ -111,14 +101,9 @@ const PagesNavbar = () => {
                         display: "flex",
                         flexDirection: customStyles.direction.row,
                         transition: 'transform 0.3s ease, color 0.3s ease',
-                        // borderRadius: '10px',
-                        // padding: '8px 16px',
-                        // margin : "0px 10px",
                         '&:hover': {
                             transform: 'scale(1.1)',
                             color: customStyles.colors.black,
-                            // backgroundColor: '#f0f0f0',
-                            // boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
                         },
                         '& .MuiSvgIcon-root': {
                             transition: 'color 0.3s ease',
@@ -138,14 +123,9 @@ const PagesNavbar = () => {
                         flexDirection: customStyles.direction.row,
 
                         transition: 'transform 0.3s ease, color 0.3s ease',
-                        // borderRadius: '10px',
-                        // padding: '8px 16px',
-                        // margin : "0px 10px",
                         '&:hover': {
                             transform: 'scale(1.1)',
                             color: customStyles.colors.black,
-                            // backgroundColor: '#f0f0f0',
-                            // boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
                         },
                         '& .MuiSvgIcon-root': {
                             transition: 'color 0.3s ease',

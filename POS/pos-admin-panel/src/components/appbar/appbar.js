@@ -27,7 +27,7 @@ const AppNavBar = (props) => {
 
     // Note: Fetching data from redux...!
     const { authenticatedUser } = useSelector(({ authStates }) => { return authStates });
-    console.log("User: ", authenticatedUser);
+    // console.log("User: ", authenticatedUser);
 
     // Note: Open and close menu's handler...!
     const handleMenu = (event) => setAnchorEl(event.currentTarget);
@@ -56,7 +56,12 @@ const AppNavBar = (props) => {
                 </IconButton>
 
                 {/* Title */}
-                <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, color: customStyles.colors.white }}>
+                <Typography
+                    variant="h6"
+                    noWrap
+                    component="div"
+                    sx={{ flexGrow: 1, color: customStyles.colors.white }}
+                >
                     POS Admin Panel
                 </Typography>
 

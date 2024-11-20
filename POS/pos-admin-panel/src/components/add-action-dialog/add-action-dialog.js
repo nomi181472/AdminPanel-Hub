@@ -58,8 +58,8 @@ const AddActionDialog = (props) => {
     // Note: On change handler for module...!
     const onChangeForModule = (e) => {
         const val = e.target.value;
-        setModule(val);
         // console.log('Selected module: ', val);
+        setModule(val);
 
         setFeature("");
         setAction("");
@@ -160,7 +160,10 @@ const AddActionDialog = (props) => {
                     }
                 }}
             >
-                <DialogTitle style={{ fontWeight: "bold", color: "#333" }}>Select Options</DialogTitle>
+                <DialogTitle style={{ fontWeight: "bold", color: "#333" }}>
+                    Select Options
+                </DialogTitle>
+
                 <DialogContent>
 
                     {/* Module Dropdown */}
@@ -179,7 +182,7 @@ const AddActionDialog = (props) => {
                             value={module}
                             label="Module"
                             onChange={onChangeForModule}
-                            style={{ backgroundColor: "white", borderRadius: 5 }}
+                            style={{ backgroundColor: customStyles.colors.white, borderRadius: 5 }}
                             MenuProps={{
                                 PaperProps: {
                                     style: { maxHeight: 300, borderRadius: 10 }
@@ -192,7 +195,7 @@ const AddActionDialog = (props) => {
                                         <MenuItem
                                             key={item?.apiName}
                                             value={item?.apiName}
-                                            style={{ display: "flex", alignItems: "center" }}
+                                            style={{ display: "flex", alignItems: customStyles.alignment.center }}
                                         >
                                             {item?.apiName}
                                         </MenuItem>
@@ -219,7 +222,7 @@ const AddActionDialog = (props) => {
                             label="Feature"
                             onChange={(e) => setFeature(e.target.value)}
                             disabled={!module}
-                            style={{ backgroundColor: "white", borderRadius: 5 }}
+                            style={{ backgroundColor: customStyles.colors.white, borderRadius: 5 }}
                             MenuProps={{
                                 PaperProps: {
                                     style: { maxHeight: 300, borderRadius: 10 }
@@ -234,7 +237,7 @@ const AddActionDialog = (props) => {
                                                 <MenuItem
                                                     key={index}
                                                     value={item}
-                                                    style={{ display: "flex", alignItems: "center" }}
+                                                    style={{ display: "flex", alignItems: customStyles.alignment.center }}
                                                 >
                                                     {breakString(item?.slice(1))}
                                                 </MenuItem>
@@ -263,7 +266,7 @@ const AddActionDialog = (props) => {
                             label="Action"
                             onChange={(e) => setAction(e.target.value)}
                             disabled={!feature}
-                            style={{ backgroundColor: "white", borderRadius: 5 }}
+                            style={{ backgroundColor: customStyles.colors.white, borderRadius: 5 }}
                             MenuProps={{
                                 PaperProps: {
                                     style: { maxHeight: 300, borderRadius: 10 }
@@ -276,9 +279,9 @@ const AddActionDialog = (props) => {
                                         <MenuItem
                                             key={index}
                                             value={renderActionName(item)}
-                                            style={{ display: "flex", alignItems: "center" }}
+                                            style={{ display: "flex", alignItems: customStyles.alignment.center }}
                                         >
-                                            { breakString(renderActionName(item)) }
+                                            {breakString(renderActionName(item))}
                                         </MenuItem>
                                     );
                                 })
@@ -297,7 +300,7 @@ const AddActionDialog = (props) => {
                                         onClick={handleSave}
                                         style={{
                                             backgroundColor: customStyles.colors.primary,
-                                            color: "white",
+                                            color: customStyles.colors.white,
                                             boxShadow: "0px 4px 10px rgba(0,0,0,0.2)"
                                         }}
                                     >

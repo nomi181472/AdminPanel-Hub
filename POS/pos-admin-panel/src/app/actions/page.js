@@ -100,11 +100,14 @@ const Actions = () => {
   // console.log("Error states: ", errorMessage);
   // console.log('Actions: ', actions);
 
+  // Note: Table page change handler...!
   const handleChangePage = (event, newPage) => {
+    // console.log('Page No: ', newPage);
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
+    // console.log("Row data per page: ", event.target.value);
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -134,7 +137,7 @@ const Actions = () => {
     if (iconData?.id != 1) {
       setSelectRow(rowData);
       setShowDialog(true);
-    }
+    };
   };
 
   // Note: Mounted hook...!
@@ -242,41 +245,45 @@ const Actions = () => {
                     </TableHead>
 
                     <TableBody>
-                      {filteredRows
-                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                        .map((row, index) => (
-                          <TableRow
-                            key={row.id}
-                            sx={{
-                              "&:hover": {
-                                backgroundColor: "#f9f9f9",
-                                transition: "background-color 0.3s ease",
-                              },
-                            }}
-                          >
-                            <TableCell>{index + 1}</TableCell>
-                            <TableCell>{row?.id.slice(0, 5)}</TableCell>
-                            <TableCell>
-                              {row?.name.slice(row?.name.lastIndexOf("/") + 1)}
-                            </TableCell>
-                            {renderIcons?.map((item, index) => {
-                              return (
-                                <TableCell key={item.id}>
-                                  <IconButton onClick={() => iconHandler(item, row)}>
-                                    <item.iconName
-                                      sx={{
-                                        backgroundColor: item.bgColor,
-                                        padding: item.padding,
-                                        borderRadius: item.borderRadius,
-                                        color: item.color,
-                                      }}
-                                    />
-                                  </IconButton>
-                                </TableCell>
-                              );
-                            })}
-                          </TableRow>
-                        ))}
+                      {
+                        filteredRows
+                          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                          .map((row, index) => (
+                            <TableRow
+                              key={row.id}
+                              sx={{
+                                "&:hover": {
+                                  backgroundColor: "#f9f9f9",
+                                  transition: "background-color 0.3s ease",
+                                },
+                              }}
+                            >
+                              <TableCell>{index + 1}</TableCell>
+                              <TableCell>{row?.id.slice(0, 5)}</TableCell>
+                              <TableCell>
+                                {row?.name.slice(row?.name?.lastIndexOf("/") + 1)}
+                              </TableCell>
+                              {
+                                renderIcons?.map((item, index) => {
+                                  return (
+                                    <TableCell key={item.id}>
+                                      <IconButton onClick={() => iconHandler(item, row)}>
+                                        <item.iconName
+                                          sx={{
+                                            backgroundColor: item.bgColor,
+                                            padding: item.padding,
+                                            borderRadius: item.borderRadius,
+                                            color: item.color,
+                                          }}
+                                        />
+                                      </IconButton>
+                                    </TableCell>
+                                  );
+                                })
+                              }
+                            </TableRow>
+                          ))
+                      }
                     </TableBody>
                   </Table>
                 </TableContainer>

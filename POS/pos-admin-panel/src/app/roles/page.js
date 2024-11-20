@@ -64,10 +64,11 @@ const Roles = () => {
   const { errorMessage } = useSelector(({ errorStates }) => { return errorStates });
   // console.log("Error states: ", errorMessage);
   // console.log("Features: ", features);
-  console.log("Matrix data: ", matrixDataByFeatureName);
+  // console.log("Matrix data: ", matrixDataByFeatureName);
 
   // Note: Function to break string...!
   const breakString = (str) => {
+    // console.log("String value: ", str);
     return str.replace(/([A-Z])/g, " $1").trim();
   };
 
@@ -88,18 +89,22 @@ const Roles = () => {
 
   // Note: Handler to show role has been deleted / updated successfully...!
   const roleSuccess = (statusCode, message) => {
+    // Note: Status code 200:
     if (statusCode == 200) {
       // console.log(statusCode, message);
       setSelectedFeature("");
       setShowToast(true);
       setMessage(message);
       setMessageStatus(messages.success);
-    } else if (statusCode == 400) {
+    }
+
+    // Note: Status code 400:
+    else if (statusCode == 400) {
       // console.log(statusCode, message);
       setShowToast(true);
       setMessage(message);
       setMessageStatus(messages.warning);
-    }
+    };
   };
 
   // Note: Function to get the drop down value...!
@@ -146,7 +151,7 @@ const Roles = () => {
     ) {
       // console.log("matrixDataByFeatureName: ", matrixDataByFeatureName);
       setLoadData(false);
-    }
+    };
   }, [matrixDataByFeatureName]);
 
   return (
@@ -192,7 +197,10 @@ const Roles = () => {
       <PagesNavbar />
 
       {/* Note: User stats section */}
-      <StatsCard statsOf={"roles"} handler={() => setRoleDialog(true)} />
+      <StatsCard
+        statsOf={"roles"}
+        handler={() => setRoleDialog(true)}
+      />
 
       {/* Note: Table section */}
       {
@@ -262,104 +270,111 @@ const Roles = () => {
                     },
                   }}
                 >
-                  {features && features.length > 0 ? (
-                    features.map((feature) => (
-                      <MenuItem key={feature} value={feature}>
-                        {breakString(feature?.slice(1))}
-                      </MenuItem>
-                    ))
-                  ) : (
-                    <MenuItem value="" disabled>
-                      No Feature
-                    </MenuItem>
-                  )}
+                  {
+                    features && features.length > 0
+                      ?
+                      (
+                        features.map((feature) => (
+                          <MenuItem key={feature} value={feature}>
+                            {breakString(feature?.slice(1))}
+                          </MenuItem>
+                        ))
+                      )
+                      :
+                      (
+                        <MenuItem value="" disabled>
+                          No Feature
+                        </MenuItem>
+                      )
+                  }
                 </Select>
               </Box>
 
-              {loadData ? (
-                <Loader />
-              ) : (
-                <>
-                  <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                    <TableHead>
-                      <TableRow>
-                        <StyledTableCell align={"left"}>roles</StyledTableCell>
+              {
+                loadData ? (<Loader />) : (
+                  <>
+                    <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell align={"left"}>roles</StyledTableCell>
 
-                        {matrixDataByFeatureName?.actionsInFeature?.map(
-                          (item, index) => (
-                            <StyledTableCell key={item.id} align={"center"}>
-                              {item?.name.slice(item?.name.lastIndexOf("/") + 1)}
-                            </StyledTableCell>
-                          )
-                        )}
-                      </TableRow>
-                    </TableHead>
-
-                    <TableBody>
-                      {paginatedRolesData?.map((row) => (
-                        <StyledTableRow key={row.id}>
-                          {/* Note: Role Name */}
-                          <StyledTableCell
-                            component="th"
-                            scope="row"
-                            align="left"
-                            sx={{
-                              cursor: "pointer",
-                            }}
-                            onClick={() => {
-                              setActionDialog(true);
-                              setSelectRow(row);
-                            }}
-                          >
-                            {row.name}
-                          </StyledTableCell>
-
-                          {/* Note: Actions Mapping */}
                           {matrixDataByFeatureName?.actionsInFeature?.map(
-                            (action) => {
-                              // Note: Check if the action is associated with the role
-                              const isActionAssociated =
-                                matrixDataByFeatureName?.actionsAssociatedWithRole.some(
-                                  (assoc) =>
-                                    assoc.actionId === action.id &&
-                                    assoc.roleId === row.id
-                                );
-
-                              return (
-                                <StyledTableCell key={action.id} align="center">
-                                  <Button
-                                    variant="contained"
-                                    sx={{
-                                      backgroundColor: isActionAssociated
-                                        ? "green"
-                                        : "red",
-                                    }}
-                                  >
-                                    {isActionAssociated ? "Yes" : "No"}
-                                  </Button>
-                                </StyledTableCell>
-                              );
-                            }
+                            (item, index) => (
+                              <StyledTableCell key={item.id} align={"center"}>
+                                {item?.name.slice(item?.name.lastIndexOf("/") + 1)}
+                              </StyledTableCell>
+                            )
                           )}
-                        </StyledTableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
+                        </TableRow>
+                      </TableHead>
 
-                  {/* Pagination */}
-                  {matrixDataByFeatureName && (
-                    <TablePagination
-                      component="div"
-                      count={filteredRolesData?.length}
-                      page={page}
-                      onPageChange={handleChangePage}
-                      rowsPerPage={rowsPerPage}
-                      onRowsPerPageChange={handleChangeRowsPerPage}
-                      rowsPerPageOptions={[5, 10, 25]}
-                    />
-                  )}
-                </>
-              )}
+                      <TableBody>
+                        {paginatedRolesData?.map((row) => (
+                          <StyledTableRow key={row.id}>
+                            {/* Note: Role Name */}
+                            <StyledTableCell
+                              component="th"
+                              scope="row"
+                              align="left"
+                              sx={{
+                                cursor: "pointer",
+                              }}
+                              onClick={() => {
+                                setActionDialog(true);
+                                setSelectRow(row);
+                              }}
+                            >
+                              {row.name}
+                            </StyledTableCell>
+
+                            {/* Note: Actions Mapping */}
+                            {matrixDataByFeatureName?.actionsInFeature?.map(
+                              (action) => {
+                                // Note: Check if the action is associated with the role
+                                const isActionAssociated =
+                                  matrixDataByFeatureName?.actionsAssociatedWithRole.some(
+                                    (assoc) =>
+                                      assoc.actionId === action.id &&
+                                      assoc.roleId === row.id
+                                  );
+                                {/* console.log('Associated Action', isActionAssociated); */}
+
+                                return (
+                                  <StyledTableCell key={action.id} align="center">
+                                    <Button
+                                      variant="contained"
+                                      sx={{
+                                        backgroundColor: isActionAssociated
+                                          ? "green"
+                                          : "red",
+                                      }}
+                                    >
+                                      {isActionAssociated ? "Yes" : "No"}
+                                    </Button>
+                                  </StyledTableCell>
+                                );
+                              }
+                            )}
+                          </StyledTableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+
+                    {/* Pagination */}
+                    {matrixDataByFeatureName && (
+                      <TablePagination
+                        component="div"
+                        count={filteredRolesData?.length}
+                        page={page}
+                        onPageChange={handleChangePage}
+                        rowsPerPage={rowsPerPage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                        rowsPerPageOptions={[5, 10, 25]}
+                      />
+                    )}
+                  </>
+                )
+              }
             </TableContainer>
           )
       }

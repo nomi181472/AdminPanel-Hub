@@ -88,7 +88,11 @@ const UserStatsCard = (props) => {
     const { funcHandler } = props;
 
     // Note: Fetching data from redux...!
-    const { totalUserCount, usersList, newUsersCountByMonth } = useSelector(({ userStates }) => { return userStates });
+    const {
+        totalUserCount,
+        usersList,
+        newUsersCountByMonth
+    } = useSelector(({ userStates }) => { return userStates });
     // console.log("Total users: ", totalUserCount);
     // console.log("New Users Count By Month: ", newUsersCountByMonth);
 
