@@ -32,7 +32,8 @@ instance.interceptors.request.use(
 
     (error) => {
         return Promise.reject(error);
-    });
+    }
+);
 
 // Note: Add a response interceptor for handling network errors...!
 instance.interceptors.response.use(

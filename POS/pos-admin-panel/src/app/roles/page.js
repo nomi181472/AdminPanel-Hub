@@ -231,6 +231,7 @@ const Roles = () => {
                   inputValue={searchRoles}
                   onChangeHandler={(value) => setSearchRoles(value)}
                 />
+                
                 <Select
                   value={breakString(selectedFeature?.slice(1))}
                   onChange={handleChange}

@@ -101,7 +101,11 @@ const Dashboard = () => {
                                         {stat.icon}
                                     </Box>
 
-                                    <Typography variant="h5" fontSize={{ xs: '1.25rem', md: '1.5rem' }} sx={{ color: "white" }}>
+                                    <Typography
+                                        variant="h5"
+                                        fontSize={{ xs: '1.25rem', md: '1.5rem' }}
+                                        sx={{ color: customStyles.colors.white }}
+                                    >
                                         <CountUp
                                             end={stat?.value}
                                             duration={3}
@@ -109,7 +113,11 @@ const Dashboard = () => {
                                     </Typography>
                                 </Box>
 
-                                <Typography variant="subtitle2" fontSize={{ xs: '0.875rem', md: '1rem' }} sx={{ color: "white" }}>
+                                <Typography
+                                    variant="subtitle2"
+                                    fontSize={{ xs: '0.875rem', md: '1rem' }}
+                                    sx={{ color: customStyles.colors.white }}
+                                >
                                     {stat.title}
                                 </Typography>
                             </Paper>
@@ -119,7 +127,7 @@ const Dashboard = () => {
             {/* Charts Section */}
             <Box
                 display="flex"
-                flexDirection={{ xs: 'column', lg: 'row' }}
+                flexDirection={{ xs: customStyles.direction.column, lg: customStyles.direction.row }}
                 justifyContent={customStyles.alignment.spaceBetween}
                 gap={3}
             >
@@ -130,7 +138,7 @@ const Dashboard = () => {
                         p: 3,
                         flex: '1 1 auto',
                         height: { xs: '400px', lg: '500px' },
-                        width: '100%',
+                        width: customStyles.sizeInPercent.size_100,
                         maxWidth: { lg: '50%' },
                         mb: { xs: 2, lg: 0 },
                         backgroundColor: "#F2F2F2"
@@ -151,7 +159,7 @@ const Dashboard = () => {
                         sx={{
                             position: customStyles.position.relative,
                             height: '90%',
-                            width: '100%',
+                            width: customStyles.sizeInPercent.size_100,
                             maxHeight: { xs: '200px', md: '350px' },
                             display: 'flex',
                             alignItems: customStyles.alignment.center,
@@ -191,7 +199,7 @@ const Dashboard = () => {
                         p: 3,
                         flex: '1 1 auto',
                         height: { xs: '400px', lg: '500px' }, // Adjust the height for mobile and desktop
-                        width: '100%',
+                        width: customStyles.sizeInPercent.size_100,
                         maxWidth: { lg: '48%' },
                         mb: { xs: 2, lg: 0 },
                         overflow: 'hidden',
@@ -206,7 +214,7 @@ const Dashboard = () => {
                         sx={{
                             position: customStyles.position.relative,
                             height: '80%',
-                            width: '100%',
+                            width: customStyles.sizeInPercent.size_100,
                             maxHeight: { xs: '200px', md: '350px' },
                             display: 'flex',
                             alignItems: customStyles.alignment.center,
