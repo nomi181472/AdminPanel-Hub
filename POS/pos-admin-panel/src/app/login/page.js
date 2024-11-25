@@ -1,4 +1,4 @@
-// Note: LogIn Page/Screen...!
+// Note: LogIn Page / Screen...!
 
 "use client";
 
@@ -102,7 +102,7 @@ const LogIn = () => {
                 clearStates();
                 window.location.reload();
             }, 3000);
-        }
+        };
     };
 
     const logInHandler = () => {
@@ -116,7 +116,7 @@ const LogIn = () => {
                 setFormStates({ ...formStates, loader: true });
                 const formDataClone = { email: formStates.email, password: formStates.password };
                 dispatch(logInUser(formDataClone, resHandler));
-            }
+            };
         }
 
         catch (error) {
@@ -127,8 +127,8 @@ const LogIn = () => {
                     message: error,
                     messageStatus: messages.warning
                 });
-            }
-        }
+            };
+        };
     };
 
     return (
@@ -146,7 +146,7 @@ const LogIn = () => {
                 <Lottie
                     animationData={AuthBGLottie}
                     loop={true}
-                    style={{ width: '100%', height: '100%' }}
+                    style={{ width: customStyles.sizeInPercent.size_100, height: customStyles.sizeInPercent.size_100 }}
                 />
             </div>
 
@@ -155,18 +155,18 @@ const LogIn = () => {
                 sx={{
                     minHeight: '100vh',
                     display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    position: 'relative',
+                    justifyContent: customStyles.alignment.center,
+                    alignItems: customStyles.alignment.center,
+                    position: customStyles.position.relative,
                     zIndex: 1
                 }}
             >
                 <Box
                     sx={{
                         display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        backgroundColor: 'white',
+                        flexDirection: customStyles.direction.column,
+                        alignItems: customStyles.alignment.center,
+                        backgroundColor: customStyles.colors.white,
                         padding: { xs: 2, sm: 4 },
                         borderRadius: 2,
                         boxShadow: 3,
@@ -174,7 +174,7 @@ const LogIn = () => {
                         width: { xs: '100%', sm: '550px' }
                     }}
                 >
-                    <Avatar sx={{ m: 1, bgcolor: 'black' }}>
+                    <Avatar sx={{ m: 1, bgcolor: customStyles.colors.black }}>
                         <LockOutlinedIcon />
                     </Avatar>
 
@@ -225,7 +225,7 @@ const LogIn = () => {
                         <Button
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 3, mb: 2, backgroundColor: 'black', py: 1.5 }}
+                            sx={{ mt: 3, mb: 2, backgroundColor: customStyles.colors.black, py: 1.5 }}
                             onClick={logInHandler}
                             disabled={formStates.loader}
                         >

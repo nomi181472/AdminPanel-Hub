@@ -33,14 +33,14 @@ const RootLayout = ({ children }) => {
   const pathname = usePathname();
   // console.log("Current path: ", pathname);
 
-  // Note: This hook will when pathname will change...!
+  // Note: This hook will run when pathname state will update...!
   useEffect(() => {
     setLoading(true);
 
-    // Simulate a delay of 1-2 seconds
+    // Note: Loading disable after 1 second...!
     const timer = setTimeout(() => setLoading(false), 1000);
 
-    // Cleanup the timer on component unmount or when pathname changes
+    // Note: Cleanup the timer on component unmount or when pathname changes
     return () => clearTimeout(timer);
   }, [pathname]);
 
@@ -51,7 +51,10 @@ const RootLayout = ({ children }) => {
           <PersistGate persistor={persistor}>
             <ThemeProvider theme={theme}>
               <CssBaseline />
+              {/* Note: Loading enable when page / screen change */}
               {loading && <ScreenLoader />}
+
+              {/* Pages / Screen */}
               <AppLayOut>
                 {children}
               </AppLayOut>

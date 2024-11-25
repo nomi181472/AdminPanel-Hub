@@ -51,7 +51,7 @@ instance.interceptors.response.use(
                 type: SET_ERROR,
                 payload: "Access forbidden. You don't have permission to access this resource.",
             });
-        }
+        };
 
         // Note: Handle network error...!
         if (!error.response) {

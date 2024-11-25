@@ -1,4 +1,4 @@
-// Note: Roles page/screen...!
+// Note: Roles page / screen...!
 
 "use client";
 
@@ -30,15 +30,16 @@ import ShowMessage from "@/components/toast-message/toast-message";
 import Loader from "@/components/loader/loader";
 import RoleDialog from "@/components/role-dialog/role-dialog";
 import ConfirmActionDialog from "@/components/confirm-action-dialog/confirm-action-dialog";
+import ErrorMessage from "@/components/error-message/error-message";
 import messages from "@/utils/messages/messages";
 import {
   getAllFeatures,
   getMatrixDataByFeatureName,
 } from "@/redux/store/actions/roles-actions/roles-actions";
 import { customStyles } from "@/styles/styles";
-import ErrorMessage from "@/components/error-message/error-message";
 
 const Roles = () => {
+
   // Note: Handeling states here...!
   const [searchRoles, setSearchRoles] = useState("");
   const [page, setPage] = useState(0);
@@ -231,7 +232,7 @@ const Roles = () => {
                   inputValue={searchRoles}
                   onChangeHandler={(value) => setSearchRoles(value)}
                 />
-                
+
                 <Select
                   value={breakString(selectedFeature?.slice(1))}
                   onChange={handleChange}
@@ -246,7 +247,7 @@ const Roles = () => {
                   sx={{
                     width: 300,
                     paddingLeft: 1,
-                    backgroundColor: "transparent",
+                    backgroundColor: customStyles.colors.transparent,
                     border: "none",
                     borderBottom: "1px solid black",
                     borderRadius: 0,
@@ -338,7 +339,7 @@ const Roles = () => {
                                       assoc.actionId === action.id &&
                                       assoc.roleId === row.id
                                   );
-                                {/* console.log('Associated Action', isActionAssociated); */}
+                                {/* console.log('Associated Action', isActionAssociated); */ }
 
                                 return (
                                   <StyledTableCell key={action.id} align="center">

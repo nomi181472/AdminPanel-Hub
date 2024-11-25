@@ -1,4 +1,4 @@
-// Note: AppLayOut component...!
+// Note: AppLayOut (Client) component...!
 
 'use client';
 
@@ -6,8 +6,8 @@ import * as React from 'react';
 import { useState, useEffect } from "react";
 import { useRouter, usePathname } from 'next/navigation';
 
-import Container from '@mui/material/Container'
-import Box from '@mui/material/Box';
+// Note: Importing required MUI components...!
+import { Container, Box } from '@mui/material';
 
 // Note: Importing required components...!
 import { DrawerHeader, Main } from '@/components/mui-sections/mui-sections';
@@ -16,7 +16,7 @@ import AppNavBar from "@/components/appbar/appbar";
 import { customStyles } from "../styles/styles";
 
 const AppLayOut = (props) => {
-  // console.log("Props: ", props);
+  // console.log("Props of app loyout component: ", props);
 
   // Note: Handeling states here...!
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -30,7 +30,7 @@ const AppLayOut = (props) => {
   const handleDrawerOpen = () => setOpenDrawer(true);
   const handleDrawerClose = () => setOpenDrawer(false);
 
-  // Note: This hook will run when pathname update...!
+  // Note: This hook will run when pathname state update...!
   useEffect(() => {
     if (pathName == "/") router.push("/dashboard");
   }, [pathName]);
@@ -68,10 +68,10 @@ const AppLayOut = (props) => {
         <Container
           maxWidth="xl"
           sx={{
-            width: '100%',
+            width: customStyles.sizeInPercent.size_100,
             padding: { xs: '8px', sm: '16px', md: '24px' },
             display: 'flex',
-            flexDirection: 'column',
+            flexDirection: customStyles.direction.column
           }}
         >
           {props?.children}
@@ -83,10 +83,10 @@ const AppLayOut = (props) => {
 
 const RenderAppLayOut = (props) => {
 
-  // Note: Verifying user authentication...!
-  // const isUserAuthenticated = getCookie("UserAuthenticated");
+  // Note: Fetching user authorization token from local storage state...!
   const isUserAuthenticated = localStorage.getItem("AuthToken");
   // console.log("isUserAuthenticated: ", isUserAuthenticated);
+
 
   return (
     (isUserAuthenticated)
