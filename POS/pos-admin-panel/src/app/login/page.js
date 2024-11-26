@@ -131,6 +131,77 @@ const LogIn = () => {
         };
     };
 
+    // Note: Function to convert hex to RGBA...!
+    const hexToRGBA = (hex) => {
+        // console.log("Hex code: ", hex);
+
+        let r = 0, g = 0, b = 0, a = 1;
+
+        // Note: If color has 3 digits (e.g. #fff)
+        if (hex.length === 4) {
+            r = parseInt(hex[1] + hex[1], 16);
+            g = parseInt(hex[2] + hex[2], 16);
+            b = parseInt(hex[3] + hex[3], 16);
+        }
+
+        // Note: If color has 6 digits (e.g. #ff5733)
+        else if (hex.length === 7) {
+            r = parseInt(hex[1] + hex[2], 16);
+            g = parseInt(hex[3] + hex[4], 16);
+            b = parseInt(hex[5] + hex[6], 16);
+        }
+
+        // Note: If hex code has an alpha value (e.g. rgba(255, 0, 0, 0.5))
+        else if (hex.length === 9) {
+            r = parseInt(hex[1] + hex[2], 16);
+            g = parseInt(hex[3] + hex[4], 16);
+            b = parseInt(hex[5] + hex[6], 16);
+            a = parseInt(hex[7] + hex[8], 16) / 255;
+        };
+
+        return [r / 255, g / 255, b / 255, a]; // Note: Convert to RGBA...!
+    };
+
+    // Note: Function to detect all colors...!
+    const findAllColors = (obj, colorSet = new Set()) => {
+        if (typeof obj !== "object" || obj === null) return;
+
+        for (const key in obj) {
+            if (key === "c" && obj[key].k) {
+                colorSet.add(JSON.stringify(obj[key].k)); // Note: Add colors as strings...!
+            }
+
+            else if (typeof obj[key] === "object") {
+                findAllColors(obj[key], colorSet); // Note: Recurse call...!
+            };
+        };
+
+        return colorSet;
+    };
+
+    // Note: Function to replace all colors...!
+    const replaceAllColors = (obj, toColor) => {
+        if (typeof obj !== "object" || obj === null) return;
+
+        for (const key in obj) {
+            if (key === "c" && obj[key].k) {
+                obj[key].k = toColor; // Note: Replace color...!
+            }
+
+            else if (typeof obj[key] === "object") {
+                replaceAllColors(obj[key], toColor); // Note: Recurse call...!
+            };
+        };
+    };
+
+    // Note: Convert hex color to RGBA...!
+    const newColor = hexToRGBA("#466573"); // Note: Example color...!
+
+    // Note: Detect colors and replace them...!
+    const detectedColors = findAllColors(AuthBGLottie);
+    // console.log("Detected Colors:", [...detectedColors]); // Note: Log all colors...!
+    replaceAllColors(AuthBGLottie, newColor); // Replace with your required color...!
+
     return (
         <div className={styles.authMainContainer}>
 
@@ -146,7 +217,10 @@ const LogIn = () => {
                 <Lottie
                     animationData={AuthBGLottie}
                     loop={true}
-                    style={{ width: customStyles.sizeInPercent.size_100, height: customStyles.sizeInPercent.size_100 }}
+                    style={{
+                        width: customStyles.sizeInPercent.size_100,
+                        height: customStyles.sizeInPercent.size_100
+                    }}
                 />
             </div>
 

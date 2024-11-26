@@ -1,3 +1,6 @@
+/* Note: Customize style for login screen */
+
+/* Note: Login screen container section */
 .authMainContainer {
     height: 100vh;
     width: 100%;
@@ -5,17 +8,18 @@
     overflow: hidden;
 }
 
+/* Note: Lottie background section */
 .lottieBackground {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
     height: 100%;
-    z-index: 0;
-    opacity: 0.5;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    /* opacity: 0.5; */
 }
 
 /* Note: Additional styles for responsive design */
