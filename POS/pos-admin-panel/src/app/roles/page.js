@@ -57,11 +57,7 @@ const Roles = () => {
   const dispatch = useDispatch();
 
   // Note: Fetching data from redux...!
-  const { features, matrixDataByFeatureName } = useSelector(
-    ({ roleStates }) => {
-      return roleStates;
-    }
-  );
+  const { features, matrixDataByFeatureName } = useSelector(({ roleStates }) => { return roleStates });
   const { errorMessage } = useSelector(({ errorStates }) => { return errorStates });
   // console.log("Error states: ", errorMessage);
   // console.log("Features: ", features);

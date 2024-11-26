@@ -7,12 +7,14 @@ import RolesIcon from '@mui/icons-material/Api';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import ActionsIcon from '@mui/icons-material/Attractions';
 
+// Note: Unauthenticated routes / files...!
 const unAuthenticatedRoutes = [
     "/login",
     "/signup",
     "/forget-password",
 ];
 
+// Note: Authenticated routes / files...!
 const authenticatedRoutes = [
     "/",
     "/dashboard",
@@ -23,6 +25,7 @@ const authenticatedRoutes = [
     "/actions"
 ];
 
+// Note: Application routes...!
 const appRoutes = [
     {
         id: 1,
@@ -46,6 +49,7 @@ const appRoutes = [
     },
 ];
 
+// Note: Pages navbar routes...!
 const navbarRoutes = [
     {
         id: 0,
