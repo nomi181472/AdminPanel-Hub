@@ -77,7 +77,7 @@ const navbarRoutes = [
         label: 'actions',
         path: authenticatedRoutes[6],
         icon: ActionsIcon
-    }
+    },
 ];
 
 export {
