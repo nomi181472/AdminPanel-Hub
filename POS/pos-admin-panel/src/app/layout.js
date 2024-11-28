@@ -1,4 +1,4 @@
-// Note: Main root / configuration file...!
+// Note: Main root / configuration file (Client component)...!
 
 'use client';
 

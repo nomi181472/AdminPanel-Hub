@@ -16,14 +16,14 @@ const ShowMessage = (props) => {
                 open={show}
                 autoHideDuration={3000}
                 onClose={close}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                anchorOrigin={{ vertical: 'bottom', horizontal: customStyles.alignment.center }}
             >
                 <Alert
                     onClose={close}
                     severity={status}
                     variant="filled"
                     sx={{
-                        width: '100%',
+                        width: customStyles.sizeInPercent.size_100,
                         backgroundColor: customStyles.colors.black,
                         color: customStyles.colors.white
                     }}

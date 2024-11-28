@@ -37,18 +37,6 @@ import {
     from '@/redux/store/actions/user-actions/user-actions';
 import { customStyles } from '@/styles/styles';
 
-const newTableHead = [
-    { id: 1, label: 'no.' },
-    { id: 2, label: 'user name' },
-    { id: 3, label: 'user id' },
-    { id: 4, label: 'user email' },
-    { id: 5, label: 'active' },
-    { id: 6, label: 'created at' },
-    { id: 7, label: 'updated at' },
-    { id: 8, label: 'created by' },
-    { id: 9, label: 'updated by' }
-];
-
 // Note: Table head data...!
 const tableHead = [
     { id: 1, label: 'no.' },
@@ -215,7 +203,7 @@ const Users = () => {
 
             {/* Heading Section */}
             <Box mb={2}>
-                <Typography variant="h5" fontWeight="bold">
+                <Typography variant="h5" fontWeight={customStyles.fontWeight.bold}>
                     Users
                 </Typography>
 

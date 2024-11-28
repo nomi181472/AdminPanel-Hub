@@ -1,4 +1,4 @@
-// Note: AppLayOut (Client) component...!
+// Note: AppLayOut (Client component)...!
 
 'use client';
 
